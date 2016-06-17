@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var ticketSchema = mongoose.Schema({
   event: { type: String, required: true },
   date: { type: Date, required: true },
-  price: { type: Number, required: true },
+  price: { type: Number, required: true }
 });
 
 module.exports = mongoose.model('Ticket', ticketSchema);

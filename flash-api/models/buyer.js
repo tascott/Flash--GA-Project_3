@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var projectSchema = mongoose.Schema({
+var buyerSchema = mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   userName: { type: String, required: true },
