@@ -55,3 +55,5 @@ module.exports = {
   sellersShow:   sellersShow,
   sellersUpdate: sellersUpdate,
   sellersDelete: sellersDelete
+
+}

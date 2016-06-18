@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
 
 var sellerSchema = mongoose.Schema({
-  first name: { type: String, required: true },
-  last name: { type: String, required: true},
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true},
   email: String,
   phone: String,
   location: String,
