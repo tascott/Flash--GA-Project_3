@@ -1,7 +1,7 @@
 var Seller = require("../models/seller");
 
 function sellersIndex(req, res){
-  Seller.find({}, function(err, sellers) {
+  Seller.find({}).populate("tickets").exec(function(err, sellers) {
     if (err) return res.status(404).send(err);
 
     res.status(200).send(sellers);
@@ -21,7 +21,7 @@ function sellersCreate(req, res){
 function sellersShow(req, res){
   var id = req.params.id;
 
-  Seller.findById({ _id: id }).populate("ticket").exec(function(err, seller) {
+  Seller.findById({ _id: id }).populate("tickets").exec(function(err, seller) {
     if (err) return res.status(500).send(err);
     if (!seller) return res.status(404).send(err);
 
@@ -43,9 +43,9 @@ function sellersUpdate(req, res){
 function sellersDelete(req, res){
   var id = req.params.id;
 
-  Seller.remove({ _id: id }, function(err) {
+  Seller.findByIdAndRemove({ _id: id }, function(err) {
     if (err) return res.status(500).send(err);
-    res.status(200)
+    res.status(200).json({ message: "Seller deleted"});
   })
 }
 
@@ -55,3 +55,4 @@ module.exports = {
   sellersShow:   sellersShow,
   sellersUpdate: sellersUpdate,
   sellersDelete: sellersDelete
+}
