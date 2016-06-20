@@ -1,5 +1,7 @@
 var Buyer = require("../models/buyer");
 
+
+
 function buyersIndex(req, res){
   Buyer.find({}).populate("tickets").exec(function(err, buyers) {
     if (err) return res.status(404).send(err);
