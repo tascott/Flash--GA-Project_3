@@ -54,6 +54,7 @@ function toggleShowBuyers(){
 }
 
 
+
 // GET ALL SELLERS
 
 function getSellers(){
@@ -89,19 +90,23 @@ function createSeller(){
   event.preventDefault();
 
   $.ajax({
-    url:'http://localhost:3000/sellers',
+    url:'http://localhost:3000/seller-register',
     type:'post',
     data: { seller: {
       "firstName": $("input#firstname").val(),
       "lastName": $("input#lastname").val(),
       "userName": $("input#username").val(),
       "email": $("input#email").val(),
-      "phone": $("input#phone").val()
+      "phone": $("input#phone").val(),
+      "location": $("input#location").val(),
+      "password": $("input#password").val(),
+      "passwordConfirmation": $("input#passwordconfirmation").val()
     }}
 
   }).done(function(data) {
-    addSeller(data);
+    addSeller(data.seller);
     toggleSellerForm();
+    console.log(data);
     $("input#firstname").val(null),
     $("input#lastname").val(null),
     $("input#username").val(null),
@@ -129,24 +134,29 @@ function createBuyer(){
   event.preventDefault();
 
   $.ajax({
-    url:'http://localhost:3000/buyers',
+    url:'http://localhost:3000/buyer-register',
     type:'post',
     data: { buyer: {
       "firstName": $("input#buyerfirstname").val(),
       "lastName": $("input#buyerlastname").val(),
       "userName": $("input#buyerusername").val(),
       "email": $("input#buyeremail").val(),
-      "phone": $("input#buyerphone").val()
+      "phone": $("input#buyerphone").val(),
+      "password": $("input#buyerpassword").val(),
+      "passwordConfirmation": $("input#buyerpasswordconfirmation").val()
     }}
 
   }).done(function(data) {
-    addBuyer(data);
+    addBuyer(data.buyer);
+    console.log(data);
     toggleBuyerForm();
     $("input#buyerfirstname").val(null),
     $("input#buyerlastname").val(null),
     $("input#buyerusername").val(null),
     $("input#buyeremail").val(null),
-    $("input#buyerphone").val(null)
+    $("input#buyerphone").val(null),
+    $("input#buyerpassword").val(null),
+    $("input#buyerpasswordconfirmation").val(null)
   });
 }
 
@@ -260,7 +270,7 @@ function editSeller(){
     $("input#edit-phone").val(seller.phone)
     $('form#edit-seller').slideDown()
   });
-  $('#edit-seller').on('submit', updateSeller);
+  $('#edit-seller').on('submit', updateSeller.bind(this));
 }
 
 var updateSeller = function(){
@@ -273,6 +283,7 @@ var updateSeller = function(){
       phone: $("input#edit-phone").val()
     }
   };
+  console.log($(this).data().id)
   $.ajax({
     method: 'patch',
     url: 'http://localhost:3000/sellers/'+$(this).data().id,

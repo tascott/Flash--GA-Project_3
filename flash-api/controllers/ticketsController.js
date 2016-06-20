@@ -15,33 +15,17 @@ function ticketsCreate(req, res){
   ticket.save(function(err){
     if (err) return res.status(500).send(err);
 
-
-    // var name = req.body.ticket.seller;
+    var userName = req.body.seller;
+    console.log(userName);
+    var bug = req.body.ticket;
+    console.log(bug);
+    var help = (req.body)
+    console.log(help)
     
-    // Seller.findOne({ userName: name }, function(err, seller){
-    //    seller.tickets.push(ticket);
-    //    seller.save();
-    
-    // });
-
-    // Buyer.findOne({ userName: name}), function(err, buyer){
-    //   buyer.tickets.push(ticket);
-    //   seller.save();
-    // }
-
-    var name = req.body.ticket.seller;
-    
-    Seller.findOne({ userName: name }, function(err, seller){
+    Seller.findOne({ userName: userName }, function(err, seller){
        seller.tickets.push(ticket);
        seller.save();
-    
     });
-
-    Buyer.findOne({ userName: name}), function(err, buyer){
-      buyer.tickets.push(ticket);
-      seller.save();
-    }
-
 
     res.status(201).send(ticket)
   });
