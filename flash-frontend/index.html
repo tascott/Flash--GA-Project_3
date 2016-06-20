@@ -20,11 +20,14 @@
 
       <li><a id="seller-index-button" href="#">All Sellers</a></li>
       <li><a id="buyer-index-button" href="#">All Buyers</a></li>
+      <li><a id="seller-login-button" href="#">Login</a></li>
+      <li><a id="logout-button" href="#">Logout</a></li>
     </ul>
   </nav>
 </header> 
 
 <main>
+
 
 
 <form id="new-seller">
@@ -42,8 +45,15 @@
 <form id="edit-seller" >
   <input type="text" name='edit-firstName' id="edit-firstName">
   <input type="text" name='edit-lastName' id="edit-lastName">
-  <input type="text" name='edit-userName' id="edit-bio">
+  <input type="text" name='edit-userName' id="edit-userName">
   <input type="text" name='edit-phone' id="edit-phone">
+  <input type="submit" value='Save' id="submit">
+</form>
+
+
+<form id="login-seller" >
+  <input type="text" name='login-seller-userName' id="login-seller-userName">
+  <input type="password" name='login-seller-password' id="login-seller-password">
   <input type="submit" value='Save' id="submit">
 </form>
 
@@ -78,6 +88,7 @@
   <input type="text" name='price' id="price" placeholder="Price">
   <input type="submit" value='Save' id="submit">
 </form>
+
 
 
 

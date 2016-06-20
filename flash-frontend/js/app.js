@@ -1,6 +1,9 @@
 $(document).ready(function(){
   getSellers();
   getBuyers();
+  // checkMyToken();
+
+
 
   $("form#new-seller").on("submit", createSeller);
   $("form#new-buyer").on("submit", createBuyer);
@@ -9,8 +12,13 @@ $(document).ready(function(){
   $("#seller-form-button" ).on("click", toggleSellerForm);
   $("#buyer-form-button" ).on("click", toggleBuyerForm);
 
+  $("#seller-login-button" ).on("click", toggleSellerLoginForm);
+  $("#logout-button" ).on("click", logout);
+
   $("#seller-index-button" ).on("click", toggleShowSellers);
   $("#buyer-index-button" ).on("click", toggleShowBuyers);
+
+
 
 
   $("body").on("click", ".delete", removeSeller);
@@ -26,6 +34,20 @@ $(document).ready(function(){
   $('body').on('click', '#addTicket', toggleAddTicket);
  
 });
+
+
+// function checkMyToken(){
+//   var token = window.localStorage.getItem('token');
+
+//   if (token) {
+//     //hooray we are logged in
+//     $.ajaxSetup({
+//         headers: {'Authorisation': 'Bearer ' + token }
+//     });
+
+
+//   }
+// }
 
 
 //INDEX - SELLERS
@@ -78,7 +100,24 @@ function getBuyers(){
 }
 
 
+
 //----------------------------------------------------//
+
+// SELLER LOG IN
+
+function toggleSellerLoginForm() {
+
+    console.log("you clicked me");
+
+}
+
+// LOG OUT
+
+function logout() {
+  
+
+}
+
 
 // CREATE SELLER
 
