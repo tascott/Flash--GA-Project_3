@@ -8,8 +8,9 @@
   <link rel="stylesheet" type="text/css" href="./css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script type="text/javascript" src="./js/app.js"></script>
+  <script type="text/javascript" src="./js/locationJS.js"></script>
+
   <!-- <script src="./js/client.js" charset="utf-8"></script> -->
-  
 </head>
 <body>
 
@@ -82,32 +83,13 @@
 </form>
 
 
-
-
-
-
-
-<div id="map"></div>
-
-
-
-
-
-
-
-
-
-
-
-
+<div id="mainBanner">
 
 
 <div id="sellers">
-<h2>Sellers</h2>
 </div>
 
 <div id="buyers">
-<h2>Buyers</h2>
 </div>
 
 <div id="show">
@@ -117,14 +99,28 @@
 </div>
 
 
+<img src="http://emojipop.net/data/images/emoji_set_297.png">
+<h1>Buy and sell last minute <br> tickets to sought-after events</h1>
+<button class="btn">See Tickets</button>
+<button class="btn">Sign Up</button>
+
+</div>
+
+
+<button id="getLocation" class="btn">Get My Location</button>
+<div id="map-canvas">
+</div>
+
+<div id="location">
+<h2></h2>
+</div>
+
 </main>
 
-<!-- <img src="http://tinyurl.com/zf252j6"> -->
 
-
-
-
-<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap"> </script> -->
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_BECvBlfI-E7bfu7fcXcnAOowGWnQyyc">
+</script>
 
 
 </body>

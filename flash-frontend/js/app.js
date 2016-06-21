@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+
   getSellers();
   getBuyers();
 
@@ -37,19 +39,19 @@ function toggleShowSellers(){
   setTimeout(function(){
     $("#show").html(" ");
     $("#tickets").html(" ");
-    $('#sellers').slideDown()
+    $('#sellers').toggle("slow")
   }, 600);
 }
 
 //INDEX - BUYERS
 function toggleShowBuyers(){
   $("#show").slideUp("slow");
-  $("#buyers").slideUp("slow");
-  $("#seller").slideUp("slow");
+  $("#tickets").slideUp("slow");
+  $("#sellers").slideUp("slow");
   setTimeout(function(){
     $("#show").html(" ");
     $("#tickets").html(" ");
-    $('#buyers').slideDown()
+    $('#buyers').toggle("slow")
   }, 600);
 }
 
@@ -84,6 +86,8 @@ function getBuyers(){
 
 function toggleSellerForm(){
   $("form#new-seller").slideToggle("slow");
+  $("form#new-buyer").slideUp("slow");
+
 }
 
 function createSeller(){
@@ -128,6 +132,7 @@ function addSeller(seller){
 
 function toggleBuyerForm(){
   $("form#new-buyer").slideToggle("slow");
+  $("form#new-seller").slideUp("slow");
 }
 
 function createBuyer(){
