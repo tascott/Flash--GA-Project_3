@@ -15,7 +15,6 @@ $(document).ready(function(){
   $("form#login-seller").on("submit", logSellerIn);
   $("form#login-buyer").on("submit", logBuyerIn);
 
-
   $("#seller-form-button" ).on("click", toggleSellerForm);
   $("#buyer-form-button" ).on("click", toggleBuyerForm);
 
@@ -126,8 +125,7 @@ function getBuyers(){
 
 function toggleSellerLoginForm() {
 
-    console.log("you clicked me");
-
+      $('#login-seller').toggle("slow")
   
 }
 
@@ -144,6 +142,8 @@ function logSellerIn(){
   }).done(function(data){
       console.log(data);
         // body...
+
+
 
       window.localStorage.setItem('sellerToken' , data.sellerToken);
       console.log("logged in")
@@ -204,6 +204,8 @@ function logout() {
 
 }
 
+// CREATE SELLEERRR !!!!!!!!!~~~~~~~~~~~~~~~~
+
 
 // CREATE SELLER
 
@@ -224,6 +226,8 @@ function createSeller(){
       "lastName": $("input#lastname").val(),
       "userName": $("input#username").val(),
       "email": $("input#email").val(),
+      "latitude": $("input#latitude").val(),
+      "longitude": $("input#longitude").val(),
       "phone": $("input#phone").val(),
       "location": $("input#location").val(),
       "password": $("input#password").val(),
@@ -238,6 +242,8 @@ function createSeller(){
     $("input#lastname").val(null),
     $("input#username").val(null),
     $("input#email").val(null),
+    $("input#latitude").val(null),
+    $("input#longitude").val(null),
     $("input#phone").val(null)
   });
 }
@@ -471,23 +477,33 @@ function toggleAddTicket(){
   $("form#new-ticket").slideToggle("slow");
 }
 
+function getSellerToken() {
+  if (localStorage.getItem('sellerToken'))
+  return localStorage.getItem('sellerToken');
+}
+
+function currentSeller() {
+  var token = getSellerToken();
+  if (token){
+    var payload = token.split('.')[1];
+    payload = window.atob(payload);
+    payload = JSON.parse(payload);
+    return payload
+  }
+}
+
 function createTicket(){
   event.preventDefault(); 
-
-  var token = window.localStorage.getItem('sellerToken');
-
- 
-
-
   $.ajax({
     url:'http://localhost:3000/tickets',
     type:'post',
     data: { ticket: {
       "event": $("input#event").val(),
       "date": $("input#date").val(),
-      "price": $("input#price").val()
-    }, 
-  }
+      "price": $("input#price").val(),
+      "id" : currentSeller()._id
+    } 
+    }
   }).done(function(ticket) {
     addTicket(ticket)
     toggleAddTicket();
@@ -499,9 +515,8 @@ function createTicket(){
 
 function addTicket(ticket){
   $('#tickets').prepend("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p>"
-    + ticket.date + "</p><a href='https://github.com/"
-    + ticket.price +"'>Price</a> | <a href='"
-    + "'>Website</a></div>")
+    + ticket.date + 
+    + ticket.price +"'>Price</a> | <a href='")
 }
 
 
