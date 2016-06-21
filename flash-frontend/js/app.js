@@ -13,7 +13,6 @@ $(document).ready(function(){
 
   $("form#login-seller").on("submit", logSellerIn);
 
-
   $("#seller-form-button" ).on("click", toggleSellerForm);
   $("#buyer-form-button" ).on("click", toggleBuyerForm);
 
@@ -111,8 +110,7 @@ function getBuyers(){
 
 function toggleSellerLoginForm() {
 
-    console.log("you clicked me");
-
+      $('#login-seller').toggle("slow")
   
 }
 
@@ -451,9 +449,8 @@ function createTicket(){
 
 function addTicket(ticket){
   $('#tickets').prepend("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p>"
-    + ticket.date + "</p><a href='https://github.com/"
-    + ticket.price +"'>Price</a> | <a href='"
-    + "'>Website</a></div>")
+    + ticket.date + 
+    + ticket.price +"'>Price</a> | <a href='")
 }
 
 
