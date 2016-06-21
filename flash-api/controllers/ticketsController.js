@@ -11,23 +11,23 @@ function ticketsIndex(req, res){
 }
 
 function ticketsCreate(req, res){
-  var ticket = new Ticket(req.body.ticket);
-  ticket.save(function(err){
+  
+  var newTicket = new Ticket({
+    event: req.body.ticket.event,
+    date: req.body.ticket.date,
+    price: req.body.ticket.price
+  })
+
+  newTicket.save(function(err){
     if (err) return res.status(500).send(err);
 
-    var userName = req.body.seller;
-    console.log(userName);
-    var bug = req.body.ticket;
-    console.log(bug);
-    var help = (req.body)
-    console.log(help)
-    
-    Seller.findOne({ userName: userName }, function(err, seller){
-       seller.tickets.push(ticket);
-       seller.save();
-    });
+    var id = req.body.ticket.id;
+      
+    Seller.findByIdAndUpdate(id, { $push: { tickets: newTicket._id}  }, function(err, seller){
+      if (err) return res.status(404).json({message : err});
+      return res.status(200).send(newTicket);
 
-    res.status(201).send(ticket)
+    });
   });
 }
 
