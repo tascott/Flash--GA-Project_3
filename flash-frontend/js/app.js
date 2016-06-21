@@ -4,6 +4,7 @@ $(document).ready(function(){
   getSellers();
   getBuyers();
   checkForSellerLogin();
+  checkForBuyerLogin();
 
 
 
@@ -12,12 +13,14 @@ $(document).ready(function(){
   $("form#new-ticket").on("submit", createTicket);
 
   $("form#login-seller").on("submit", logSellerIn);
+  $("form#login-buyer").on("submit", logBuyerIn);
 
 
   $("#seller-form-button" ).on("click", toggleSellerForm);
   $("#buyer-form-button" ).on("click", toggleBuyerForm);
 
   $("#seller-login-button" ).on("click", toggleSellerLoginForm);
+  $("#buyer-login-button" ).on("click", toggleBuyerLoginForm);
   $("#logout-button" ).on("click", logout);
 
   $("#seller-index-button" ).on("click", toggleShowSellers);
@@ -65,6 +68,18 @@ function toggleShowSellers(){
     $("#tickets").html(" ");
     $('#sellers').toggle("slow")
   }, 600);
+}
+
+function checkForBuyerLogin(){
+  var token = window.localStorage.getItem('buyerToken');
+
+  if (token) {
+    //hooray we are logged in
+    console.log("BUYER IS LOGGED IN, WAHOOOOOOO!")
+    $.ajaxSetup({
+        headers: {'Authorisation': 'Bearer ' + token }
+    });
+  }
 }
 
 //INDEX - BUYERS
@@ -140,6 +155,43 @@ function logSellerIn(){
 
 
 }
+
+// BUYER LOGIN 
+
+function toggleBuyerLoginForm() {
+
+    console.log("clickety click");
+
+  
+}
+
+function logBuyerIn(){
+  event.preventDefault();
+
+  $.ajax({
+    url: 'http://localhost:3000/buyer-login',
+    type: 'post',
+    data: { buyer : {
+      "email": $("input#login-buyer-userName").val(),
+      "password": $("input#login-buyer-password").val(),
+      }}
+  }).done(function(data){
+      console.log(data);
+      console.log(data.message);
+
+        // body...
+
+      window.localStorage.setItem('buyerToken' , data.token);
+      console.log("Buyer is logged in NOW")
+
+      $.ajaxSetup({
+          headers: {'Authorisation': 'Bearer ' + data.token }
+      });
+  })
+
+
+}
+
 
 // LOG OUT
 
