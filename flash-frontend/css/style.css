@@ -273,6 +273,10 @@ header nav ul li a {
   margin-bottom: 15px;
 }
 
+#login-seller {
+  display: none;
+}
+
 
 /*BUTTON STYLING*/
 

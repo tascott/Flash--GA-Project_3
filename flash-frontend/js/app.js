@@ -13,7 +13,6 @@ $(document).ready(function(){
 
   $("form#login-seller").on("submit", logSellerIn);
 
-
   $("#seller-form-button" ).on("click", toggleSellerForm);
   $("#buyer-form-button" ).on("click", toggleBuyerForm);
 
@@ -111,8 +110,7 @@ function getBuyers(){
 
 function toggleSellerLoginForm() {
 
-    console.log("you clicked me");
-
+      $('#login-seller').toggle("slow")
   
 }
 
@@ -176,6 +174,8 @@ function createSeller(){
       "lastName": $("input#lastname").val(),
       "userName": $("input#username").val(),
       "email": $("input#email").val(),
+      "latitude": $("input#latitude").val(),
+      "longitude": $("input#longitude").val(),
       "phone": $("input#phone").val(),
       "location": $("input#location").val(),
       "password": $("input#password").val(),
@@ -190,6 +190,8 @@ function createSeller(){
     $("input#lastname").val(null),
     $("input#username").val(null),
     $("input#email").val(null),
+    $("input#latitude").val(null),
+    $("input#longitude").val(null),
     $("input#phone").val(null)
   });
 }
@@ -461,9 +463,8 @@ function createTicket(){
 
 function addTicket(ticket){
   $('#tickets').prepend("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p>"
-    + ticket.date + "</p><a href='https://github.com/"
-    + ticket.price +"'>Price</a> | <a href='"
-    + "'>Website</a></div>")
+    + ticket.date + 
+    + ticket.price +"'>Price</a> | <a href='")
 }
 
 
