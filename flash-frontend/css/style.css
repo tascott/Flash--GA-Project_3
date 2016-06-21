@@ -210,6 +210,19 @@ header nav ul li a {
   display: none;
 }
 
+#ticketIndex {
+  display: none;
+  max-width: 400px;
+  max-height: 600px;
+  overflow: scroll;
+  position: absolute;
+  left: 0;
+}
+
+#ticketIndex .seller-tile {
+  border: 1px solid black; 
+}
+
 .seller-tile {
   background-color: white;
   width: 290px;
@@ -273,7 +286,7 @@ header nav ul li a {
   margin-bottom: 15px;
 }
 
-#login-seller {
+#login-seller, #login-buyer {
   display: none;
 }
 

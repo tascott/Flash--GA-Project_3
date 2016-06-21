@@ -8,6 +8,9 @@
   <link rel="stylesheet" type="text/css" href="./css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script type="text/javascript" src="./js/app.js"></script>
+  <script type="text/javascript" src="./js/buyer.js"></script>
+  <script type="text/javascript" src="./js/seller.js"></script>
+  <script type="text/javascript" src="./js/ticket.js"></script>
   <script type="text/javascript" src="./js/locationJS.js"></script>
 
   <!-- <script src="./js/client.js" charset="utf-8"></script> -->
@@ -16,7 +19,7 @@
 
 <header>
   <nav>
-    <ul>
+    <ul id="menuBar">
       <li>&#161FLASH!</li>
       <li><a id="seller-form-button" href="#">Add Seller</a></li>
       <li><a id="buyer-form-button" href="#">Add Buyer</a></li>
@@ -58,7 +61,7 @@
 
 
 <form id="login-seller" >
-  <input type="text" name='login-seller-userName' placeholder="seller username" id="login-seller-userName">
+  <input type="text" name='login-seller-userName' placeholder="Email" id="login-seller-userName">
   <input type="password" name='login-seller-password' id="login-seller-password">
   <input type="submit" value='Login' id="submit">
 </form>
@@ -86,7 +89,7 @@
 </form>
 
 <form id="login-buyer" >
-  <input type="text" name='login-buyer-userName' placeholder="buyer username" id="login-buyer-userName">
+  <input type="text" name='login-buyer-userName' placeholder="Email" id="login-buyer-userName">
   <input type="password" name='login-buyer-password' id="login-buyer-password">
   <input type="submit" value='Login' id="submit">
 </form>
@@ -118,10 +121,13 @@
 <div id="tickets">
 </div>
 
+<div id="ticketIndex">
+</div>
+
 
 <img src="http://emojipop.net/data/images/emoji_set_297.png">
 <h1>Buy and sell last minute <br> tickets to sought-after events</h1>
-<button class="btn">See Tickets</button>
+<button id="seeTicketsButton" class="btn">See Tickets</button>
 <button class="btn">Sign Up</button>
 
 </div>
