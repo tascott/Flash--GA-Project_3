@@ -132,7 +132,7 @@ function showSellerProfile(){
          +
         "'>Phone</a></div>");
     $.each(seller.tickets, function(index, ticket){
-      addTicket(ticket)
+      addTicketMike(ticket)
     })
     $("#tickets").append("<div class='ticket-tile'><h2><a id='addTicket' href='#'>Add a ticket +</a></h2></div>")
     setTimeout(function(){

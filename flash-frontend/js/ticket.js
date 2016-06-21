@@ -6,6 +6,8 @@ $(document).ready(function(){
   $('body').on('click', '#seeTicketsButton', toggleShowTickets)
   $('body').on('click', '#addTicket', toggleAddTicket)
 
+  $('body').on('click', '.hold', holdTicket);
+
   });
 
 
@@ -79,4 +81,43 @@ function addTicket2(ticket){
       + ticket.price +"'>Price</a> | <a href='")
   }
 
+  function addTicketMike(ticket){
+    $('#tickets').prepend("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p><h3> Date: "+ ticket.date + "</h3><h3> Price: "+ticket.price+" </h3><h3>"+isHeld(ticket)+"</h3>")
+
+  }
+
+  function isHeld(ticket){
+    if(ticket.hold){
+      return "<p>Ticket on Hold with Seller</p>"
+    } else {
+      return "<a class='hold' data-ticketid='"+ticket._id+"'href='#'> Get Ticket!</a>"
+    }
+
+  }
+
+  function holdTicket(){
+
+    var id = currentBuyer()._id;
+    var ticket = $(this).data().ticketid;
+
+
+    console.log("TICKET-ID: " + id);
+    console.log("BUYER: "+ ticket);
+
+      $.ajax({
+        method: 'patch',
+        url: 'http://localhost:3000/tickets/'+ticket,
+        data: { ticket : {
+                hold : true,
+                buyerID : id
+        }}
+      }).done(function(data){
+        // not ideal
+        console.log(data)
+
+      });
+  }
+
+
+  
 
