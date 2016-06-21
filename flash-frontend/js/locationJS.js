@@ -1,21 +1,18 @@
 $(document).ready(function(){
 
 
-
 $("#getLocation" ).on("click", getMyLocation);
 
-
-
 var map;
+
 
 function getMyLocation() {
 
  if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(displayLocation);
-} else {
+  } else {
   alert("no geolocation support");
-}
-
+  }
 }
 
 
@@ -29,11 +26,12 @@ function displayLocation(position) {
 
   showMap(latLng);
   createMarker(latLng);
+  getSellerLocations();
 
   var div = document.getElementById('location');
   div.innerHTML = 'You are at Latitude: ' + latitude + ', Longitude: ' + longitude;
+ 
 }
-
 
 function showMap(latLng) {
 
@@ -44,6 +42,21 @@ function showMap(latLng) {
   };
 
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+}
+
+function getSellerLocations(){
+    console.log(map);
+    var ajax = $.get('http://localhost:3000/sellers')
+      .done(function(data) {
+        $.each(data, function(index, user) {
+          var latLng = new google.maps.LatLng(user.latitude, user.longitude)
+
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+          });
+        });
+    });
 }
 
 function createMarker(latLng) {

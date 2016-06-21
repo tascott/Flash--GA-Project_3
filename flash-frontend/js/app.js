@@ -172,6 +172,8 @@ function createSeller(){
       "lastName": $("input#lastname").val(),
       "userName": $("input#username").val(),
       "email": $("input#email").val(),
+      "latitude": $("input#latitude").val(),
+      "longitude": $("input#longitude").val(),
       "phone": $("input#phone").val(),
       "location": $("input#location").val(),
       "password": $("input#password").val(),
@@ -186,6 +188,8 @@ function createSeller(){
     $("input#lastname").val(null),
     $("input#username").val(null),
     $("input#email").val(null),
+    $("input#latitude").val(null),
+    $("input#longitude").val(null),
     $("input#phone").val(null)
   });
 }
