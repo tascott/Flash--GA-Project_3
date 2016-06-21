@@ -3,16 +3,27 @@ $(document).ready(function(){
 
   getSellers();
   getBuyers();
+  checkForSellerLogin();
+
+
 
   $("form#new-seller").on("submit", createSeller);
   $("form#new-buyer").on("submit", createBuyer);
   $("form#new-ticket").on("submit", createTicket);
 
+  $("form#login-seller").on("submit", logSellerIn);
+
+
   $("#seller-form-button" ).on("click", toggleSellerForm);
   $("#buyer-form-button" ).on("click", toggleBuyerForm);
 
+  $("#seller-login-button" ).on("click", toggleSellerLoginForm);
+  $("#logout-button" ).on("click", logout);
+
   $("#seller-index-button" ).on("click", toggleShowSellers);
   $("#buyer-index-button" ).on("click", toggleShowBuyers);
+
+
 
 
   $("body").on("click", ".delete", removeSeller);
@@ -28,6 +39,19 @@ $(document).ready(function(){
   $('body').on('click', '#addTicket', toggleAddTicket);
  
 });
+
+
+function checkForSellerLogin(){
+  var token = window.localStorage.getItem('sellerToken');
+
+  if (token) {
+    //hooray we are logged in
+    console.log("HEY A SELLER IS LOGGED IN!")
+    $.ajaxSetup({
+        headers: {'Authorisation': 'Bearer ' + token }
+    });
+  }
+}
 
 
 //INDEX - SELLERS
@@ -80,7 +104,54 @@ function getBuyers(){
 }
 
 
+
 //----------------------------------------------------//
+
+// SELLER LOG IN
+
+function toggleSellerLoginForm() {
+
+    console.log("you clicked me");
+
+  
+}
+
+function logSellerIn(){
+  event.preventDefault();
+
+  $.ajax({
+    url: 'http://localhost:3000/seller-login',
+    type: 'post',
+    data: { seller : {
+      "email": $("input#login-seller-userName").val(),
+      "password": $("input#login-seller-password").val(),
+      }}
+  }).done(function(data){
+      console.log(data);
+        // body...
+
+      window.localStorage.setItem('sellerToken' , data.sellerToken);
+      console.log("logged in")
+
+      $.ajaxSetup({
+          headers: {'Authorisation': 'Bearer ' + data.sellerToken }
+      });
+  })
+
+
+}
+
+// LOG OUT
+
+function logout() {
+
+  window.localStorage.removeItem('sellerToken');
+  window.localStorage.removeItem('buyerToken');
+  console.log("Logout");
+  
+
+}
+
 
 // CREATE SELLER
 
@@ -351,6 +422,11 @@ function toggleAddTicket(){
 function createTicket(){
   event.preventDefault(); 
 
+  var token = window.localStorage.getItem('sellerToken');
+
+ 
+
+
   $.ajax({
     url:'http://localhost:3000/tickets',
     type:'post',
@@ -358,7 +434,7 @@ function createTicket(){
       "event": $("input#event").val(),
       "date": $("input#date").val(),
       "price": $("input#price").val()
-    }
+    }, 
   }
   }).done(function(ticket) {
     addTicket(ticket)
