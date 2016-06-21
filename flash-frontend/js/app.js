@@ -130,6 +130,8 @@ function logSellerIn(){
       console.log(data);
         // body...
 
+
+
       window.localStorage.setItem('sellerToken' , data.sellerToken);
       console.log("logged in")
 
@@ -151,6 +153,8 @@ function logout() {
   
 
 }
+
+// CREATE SELLEERRR !!!!!!!!!~~~~~~~~~~~~~~~~
 
 
 // CREATE SELLER
@@ -419,23 +423,33 @@ function toggleAddTicket(){
   $("form#new-ticket").slideToggle("slow");
 }
 
+function getSellerToken() {
+  if (localStorage.getItem('sellerToken'))
+  return localStorage.getItem('sellerToken');
+}
+
+function currentSeller() {
+  var token = getSellerToken();
+  if (token){
+    var payload = token.split('.')[1];
+    payload = window.atob(payload);
+    payload = JSON.parse(payload);
+    return payload
+  }
+}
+
 function createTicket(){
   event.preventDefault(); 
-
-  var token = window.localStorage.getItem('sellerToken');
-
- 
-
-
   $.ajax({
     url:'http://localhost:3000/tickets',
     type:'post',
     data: { ticket: {
       "event": $("input#event").val(),
       "date": $("input#date").val(),
-      "price": $("input#price").val()
-    }, 
-  }
+      "price": $("input#price").val(),
+      "id" : currentSeller()._id
+    } 
+    }
   }).done(function(ticket) {
     addTicket(ticket)
     toggleAddTicket();
