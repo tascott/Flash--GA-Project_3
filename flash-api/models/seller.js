@@ -7,7 +7,8 @@ var sellerSchema = mongoose.Schema({
   userName: { type: String, required: true },
   email: String,
   phone: String,
-  location: String,
+  latitude: String,
+  longitude: String,
   tickets: [{ type: mongoose.Schema.ObjectId, ref: 'Ticket' }],
   passwordHash: { type: String, required: true }
 });
