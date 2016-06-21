@@ -181,11 +181,11 @@ function logBuyerIn(){
 
         // body...
 
-      window.localStorage.setItem('buyerToken' , data.token);
+      window.localStorage.setItem('buyerToken' , data.buyerToken);
       console.log("Buyer is logged in NOW")
 
       $.ajaxSetup({
-          headers: {'Authorisation': 'Bearer ' + data.token }
+          headers: {'Authorisation': 'Bearer ' + data.buyerToken }
       });
   })
 
