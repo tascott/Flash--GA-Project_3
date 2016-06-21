@@ -1,13 +1,16 @@
 $(document).ready(function(){
   getSellers();
   getBuyers();
-  // checkMyToken();
+  checkForSellerLogin();
 
 
 
   $("form#new-seller").on("submit", createSeller);
   $("form#new-buyer").on("submit", createBuyer);
   $("form#new-ticket").on("submit", createTicket);
+
+  $("form#login-seller").on("submit", logSellerIn);
+
 
   $("#seller-form-button" ).on("click", toggleSellerForm);
   $("#buyer-form-button" ).on("click", toggleBuyerForm);
@@ -36,18 +39,17 @@ $(document).ready(function(){
 });
 
 
-// function checkMyToken(){
-//   var token = window.localStorage.getItem('token');
+function checkForSellerLogin(){
+  var token = window.localStorage.getItem('sellerToken');
 
-//   if (token) {
-//     //hooray we are logged in
-//     $.ajaxSetup({
-//         headers: {'Authorisation': 'Bearer ' + token }
-//     });
-
-
-//   }
-// }
+  if (token) {
+    //hooray we are logged in
+    console.log("HEY A SELLER IS LOGGED IN!")
+    $.ajaxSetup({
+        headers: {'Authorisation': 'Bearer ' + token }
+    });
+  }
+}
 
 
 //INDEX - SELLERS
@@ -109,11 +111,41 @@ function toggleSellerLoginForm() {
 
     console.log("you clicked me");
 
+  
+}
+
+function logSellerIn(){
+  event.preventDefault();
+
+  $.ajax({
+    url: 'http://localhost:3000/seller-login',
+    type: 'post',
+    data: { seller : {
+      "email": $("input#login-seller-userName").val(),
+      "password": $("input#login-seller-password").val(),
+      }}
+  }).done(function(data){
+      console.log(data);
+        // body...
+
+      window.localStorage.setItem('sellerToken' , data.sellerToken);
+      console.log("logged in")
+
+      $.ajaxSetup({
+          headers: {'Authorisation': 'Bearer ' + data.sellerToken }
+      });
+  })
+
+
 }
 
 // LOG OUT
 
 function logout() {
+
+  window.localStorage.removeItem('sellerToken');
+  window.localStorage.removeItem('buyerToken');
+  console.log("Logout");
   
 
 }
@@ -385,6 +417,11 @@ function toggleAddTicket(){
 function createTicket(){
   event.preventDefault(); 
 
+  var token = window.localStorage.getItem('sellerToken');
+
+ 
+
+
   $.ajax({
     url:'http://localhost:3000/tickets',
     type:'post',
@@ -392,7 +429,7 @@ function createTicket(){
       "event": $("input#event").val(),
       "date": $("input#date").val(),
       "price": $("input#price").val()
-    }
+    }, 
   }
   }).done(function(ticket) {
     addTicket(ticket)
