@@ -3,8 +3,8 @@ var express = require('express'),
     var buyerAuthenticationController = require('../controllers/buyerAuthentication');
     var sellerAuthenticationController = require('../controllers/sellerAuthentication');
     var jwt = require('jsonwebtoken');
-    var buyerSecret = require('./buyerConfig').secret;
-    var sellerSecret = require('./sellerConfig').secret;
+    var secret = require('./buyerConfig').secret;
+    // var sellerSecret = require('./sellerConfig').secret;
 
 var buyersController = require('../controllers/buyersController');
 var ticketsController = require('../controllers/ticketsController');
@@ -12,24 +12,24 @@ var sellersController = require('../controllers/sellersController');
 
 
 function checkForToken(req,res,next){
-    if(!req.headers.authorisation) return res.status(401).json({ message: 'NO BUYER TOKEN: Unauthorised'});
+    if(!req.headers.authorisation) return res.status(401).json({ message: 'NO TOKEN: Unauthorised'});
 
-    console.log("Whagt?");
 
-    var buyerToken = req.headers.authorisation.replace('Bearer ', '');
+    var token = req.headers.authorisation.replace('Bearer ', '');
 
-      jwt.verify(buyerToken , buyerSecret , function(err, user){
+      jwt.verify(token , secret , function(err, user){
       if(!user) return res.status(401).json({ message: 'Invalid Token'}); 
-      req.user =user;
+      req.user = user;
+      console.log(user);
       next();
   });
 
 }
 
-
 function authoriseBuyer(req,res, next) {
 
     if(req.user.buyer) {
+      console.log("the buyer was AUTHORISED")
       next();
     } else {
       res.status(403);
@@ -40,6 +40,7 @@ function authoriseBuyer(req,res, next) {
 function authoriseSeller(req,res, next) {
 
     if(!req.user.buyer) {
+      console.log("the seller was AUTHORISED")
       next();
     } else {
       res.status(403);
@@ -55,7 +56,7 @@ router.route('/')
   router.post('/buyer-register', buyerAuthenticationController.register );
  
 router.route('/buyers')
-    .all(checkForToken, authoriseSeller)
+    .all(checkForToken, authoriseSeller) 
   .get(buyersController.buyersIndex)
   .post(buyersController.buyersCreate)
 
