@@ -12,7 +12,7 @@ $("#seller-login-button" ).on("click", toggleSellerLoginForm);
 $("#seller-index-button" ).on("click", toggleShowSellers);
 
 $("body").on("click", ".delete", removeSeller);
-$('body').on('click', '.show', showSellerProfile)
+$('body').on('click', '.show', showSellerProfileMike)
 $('body').on('click', '.edit', editSeller);
 
 
@@ -142,6 +142,41 @@ function showSellerProfile(){
   });
 }
 
+
+// SHOW SELLER - MIKE
+
+function showSellerProfileMike(){
+  $('#sellers').slideUp();
+  $.ajax({
+    method: 'GET',
+    url: 'http://localhost:3000/sellers/'+$(this).data().id
+  }).done(function(seller){
+    $('#show').prepend("<div class='seller-tile' data-id="+ seller._id +
+      "><h2 id='username'>" +
+        seller.lastName + "</h2><p> " 
+        + seller.userName + "</p><a href='https://github.com/"+ 
+        seller.phone +"'>Phone</a> | <a href='"
+         +
+        "'>Phone</a></div>");
+    $.each(seller.tickets, function(index, ticket){
+      // If I'm a seller I want to see the buyers tickets
+      if(currentBuyer()){
+        // RENAME THIS LATER
+        addTicketMike(ticket)
+      // if I'm a buyer I want to see the seller action on my ticket
+      } else if (currentSeller()) {
+        addTicketForBuyer(ticket)
+      } else {
+
+      }
+    })
+    $("#tickets").append("<div class='ticket-tile'><h2><a id='addTicket' href='#'>Add a ticket +</a></h2></div>")
+    setTimeout(function(){
+      $('#show').slideDown()
+      $('#tickets').slideDown()
+    }, 600);
+  });
+}
 
 
 

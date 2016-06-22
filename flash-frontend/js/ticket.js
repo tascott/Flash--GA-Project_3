@@ -7,6 +7,7 @@ $(document).ready(function(){
   $('body').on('click', '#addTicket', toggleAddTicket)
 
   $('body').on('click', '.hold', holdTicket);
+  $('body').on('click', '.auth', authTicket);
 
   });
 
@@ -86,12 +87,78 @@ function addTicket2(ticket){
 
   }
 
+  function addTicketForBuyer(ticket){
+    $('#tickets').prepend("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p><h3> Date: "+ ticket.date + "</h3><h3> Price: "+ticket.price+" </h3><h3>"+isAuth(ticket)+"</h3>")
+
+  }
+
   function isHeld(ticket){
     if(ticket.hold){
       return "<p>Ticket on Hold with Seller</p>"
     } else {
       return "<a class='hold' data-ticketid='"+ticket._id+"'href='#'> Get Ticket!</a>"
     }
+
+  }
+
+  function isAuth(ticket){
+    if(ticket.hold){
+      return "<a class='auth' data-ticketid='"+ticket._id+"'href='#'> YOU HAVE A BUYER - Authorize?!</a>"
+    } else {
+      return "<p>Still for Sale</p>"
+    }
+
+  }
+
+  function authTicket(){
+  
+    var ticket = $(this).data().ticketid;
+    var id = currentSeller()._id;
+
+    console.log("TICKET ID: "+ ticket);
+    console.log("SELLER ID: "+ id);
+
+    // GET THE TICKET
+    $.ajax({
+      method: 'GET',
+      url: 'http://localhost:3000/tickets/'+ticket
+    }).done(function(myticket){
+      console.log("BUYER ID: "+ myticket.buyerID);
+
+      // 
+
+      // $.each(data, function(index, ticket){
+      //   addTicket2(ticket);
+      // });
+
+
+
+
+    });
+    
+    // Take the ticket out of the sellar tickets array
+
+    // $.ajax({
+    //   method: 'patch',
+    //   url: 'http://localhost:3000/sellers/'+id,
+    //   data: { ticket : {
+    //           hold : true,
+    //           buyerID : id
+    //   }}
+    // }).done(function(data){
+    //   // not ideal
+    //   console.log(data)
+
+    // });
+
+    // Put that ticket in the buyers ticekts 
+
+
+
+
+
+    // send console list
+
 
   }
 
