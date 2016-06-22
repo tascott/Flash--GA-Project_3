@@ -51,7 +51,7 @@ http.listen(port, function(){
 
 // Setup database
 var databaseURL    = 'mongodb://localhost:27017/flash-app';
-//mongoose.connect(databaseURL);
+mongoose.connect(databaseURL);
 
 // Require routes
 var routes         = require('./config/routes');
