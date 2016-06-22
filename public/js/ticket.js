@@ -15,7 +15,7 @@ $(document).ready(function(){
 // AJAX CALL - GET ALL TICKETS
 
 function getTickets(){
-  var ajax = $.get('http://localhost:3000/tickets')
+  var ajax = $.get('/tickets')
   .done(function(data){
     $.each(data, function(index, ticket){
       addTicket2(ticket);
@@ -58,7 +58,7 @@ function addTicket2(ticket){
   function createTicket(){
     event.preventDefault(); 
     $.ajax({
-      url:'http://localhost:3000/tickets',
+      url:'/tickets',
       type:'post',
       data: { ticket: {
         "event": $("input#event").val(),
@@ -119,14 +119,30 @@ function addTicket2(ticket){
     console.log("SELLER ID: "+ id);
 
     // GET THE TICKET
+    // $.ajax({
+    //   method: 'GET',
+    //   url: '/tickets/'+ticket
+    // }).done(function(myticket){
+    //   console.log("BUYER ID: "+ myticket.buyerID);
+
     $.ajax({
-      method: 'GET',
-      url: 'http://localhost:3000/tickets/'+ticket
+      method: 'POST',
+      url: '/transfer/'+ticket,
+      data: { package: {
+        "seller": id
+      }}
     }).done(function(myticket){
-      console.log("BUYER ID: "+ myticket.buyerID);
 
-      // 
+          // $.ajax({
+          //   method: 'POST'
+          //   url:    '/buyers'+id
+          //   data:   , 
 
+          // }).done(function(user){
+
+          // });
+
+      console.log(myticket)
       // $.each(data, function(index, ticket){
       //   addTicket2(ticket);
       // });
@@ -140,7 +156,7 @@ function addTicket2(ticket){
 
     // $.ajax({
     //   method: 'patch',
-    //   url: 'http://localhost:3000/sellers/'+id,
+    //   url: '/sellers/'+id,
     //   data: { ticket : {
     //           hold : true,
     //           buyerID : id
@@ -173,7 +189,7 @@ function addTicket2(ticket){
 
       $.ajax({
         method: 'patch',
-        url: 'http://localhost:3000/tickets/'+ticket,
+        url: '/tickets/'+ticket,
         data: { ticket : {
                 hold : true,
                 buyerID : id

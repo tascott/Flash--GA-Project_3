@@ -2,7 +2,6 @@ $(document).ready(function(){
 
   $("#logout-button" ).on("click", logout);
   
-
 });
 
 
@@ -11,7 +10,7 @@ function checkForSellerLogin(){
 
   if (token) {
     $("#menuBar").append("<li>Welcome seller: " + currentSeller().username + ", </li>");
-    console.log(currentSeller());
+    // console.log(currentSeller());
     //hooray we are logged in
     console.log("HEY A SELLER IS LOGGED IN!")
     $.ajaxSetup({
@@ -45,7 +44,7 @@ function logSellerIn(){
   event.preventDefault();
 
   $.ajax({
-    url: 'http://localhost:3000/seller-login',
+    url: '/seller-login',
     type: 'post',
     data: { seller : {
       "email": $("input#login-seller-userName").val(),
@@ -72,7 +71,7 @@ function logBuyerIn(){
   event.preventDefault();
 
   $.ajax({
-    url: 'http://localhost:3000/buyer-login',
+    url: '/buyer-login',
     type: 'post',
     data: { buyer : {
       "email": $("input#login-buyer-userName").val(),

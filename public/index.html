@@ -14,11 +14,12 @@
   <script type="text/javascript" src="./js/buyer.js"></script>
   <script type="text/javascript" src="./js/seller.js"></script>
   <script type="text/javascript" src="./js/ticket.js"></script>
-  <!-- <script type="text/javascript" src="./js/locationJS.js"></script> -->
+  <script type="text/javascript" src="./js/locationJS.js"></script>
   <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="./js/socketsJS.js"></script>
   <!-- <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> -->
   <style>
-
+ 
 
     body { font: 13px Helvetica, Arial; }
     form { background: #000; padding: 3px; width: 100%; position: relative; bottom: 0;}
@@ -159,40 +160,18 @@
 <h2></h2>
 </div>
 
-<div id="chatHolder">
+<!-- <div id="chatHolder">
   <ul id="messages"></ul>
   <form action="">
     <input id="m" autocomplete="off" /><button>Send</button>
   </form>
-  </div>
-
-
-<script>
- var socket = io();
- var id = Math.floor(Math.random() * 10);
- console.log('you are user ' + id);
-
-
-    navigator.geolocation.watchPosition(function(location){
-
-      socket.emit('update location' , {
-          id : id , 
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude
-      });
-
-    });
-
-
-  socket.on('location updated', function(user){
-    console.log(user);
-  });
-</script>
-
+  </div> -->
 
 <script async defer
-   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_BECvBlfI-E7bfu7fcXcnAOowGWnQyyc&libraries=places">
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_BECvBlfI-E7bfu7fcXcnAOowGWnQyyc&libraries=places">
 </script>
+
+
 
 </body>
 </html>

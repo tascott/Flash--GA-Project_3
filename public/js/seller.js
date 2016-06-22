@@ -40,7 +40,7 @@ function currentSeller() {
 
 
 function getSellers(){
-  var ajax = $.get('http://localhost:3000/sellers')
+  var ajax = $.get('/sellers')
   .done(function(data){
     $.each(data, function(index, seller){
       addSeller(seller);
@@ -83,7 +83,7 @@ function createSeller(){
   event.preventDefault();
 
   $.ajax({
-    url:'http://localhost:3000/seller-register',
+    url:'/seller-register',
     type:'post',
     data: { seller: {
       "firstName": $("input#firstname").val(),
@@ -125,7 +125,7 @@ function showSellerProfile(){
   $('#sellers').slideUp();
   $.ajax({
     method: 'GET',
-    url: 'http://localhost:3000/sellers/'+$(this).data().id
+    url: '/sellers/'+$(this).data().id
   }).done(function(seller){
     $('#show').prepend("<div class='seller-tile' data-id="+ seller._id +
       "><h2 id='username'>" +
@@ -152,7 +152,7 @@ function showSellerProfileMike(){
   $('#sellers').slideUp();
   $.ajax({
     method: 'GET',
-    url: 'http://localhost:3000/sellers/'+$(this).data().id
+    url: '/sellers/'+$(this).data().id
   }).done(function(seller){
     $('#show').prepend("<div class='seller-tile' data-id="+ seller._id +
       "><h2 id='username'>" +
@@ -188,7 +188,7 @@ function showSellerProfileMike(){
 function editSeller(){
   $.ajax({
     method: 'get',
-    url: 'http://localhost:3000/sellers/'+$(this).data().id
+    url: '/sellers/'+$(this).data().id
   }).done(function(seller){
     $("input#edit-firstName").val(seller.firstName),
     $("input#edit-lastName").val(seller.lastName),
@@ -212,7 +212,7 @@ var updateSeller = function(){
   console.log($(this).data().id)
   $.ajax({
     method: 'patch',
-    url: 'http://localhost:3000/sellers/'+$(this).data().id,
+    url: '/sellers/'+$(this).data().id,
     data: seller
   }).done(function(data){
     // not ideal
@@ -227,7 +227,7 @@ var updateSeller = function(){
 function removeSeller(){
   event.preventDefault();
   $.ajax({
-    url:'http://localhost:3000/sellers/'+$(this).data().id,
+    url:'/sellers/'+$(this).data().id,
     type:'delete'
   });
   $(this).parent().remove();
