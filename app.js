@@ -17,41 +17,9 @@ app.get('/', function(req, res){
   res.sendfile('public/index.html');
 });
 
-io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    socket.broadcast.emit('chat message', msg);
-  });
-});
-
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-
-  io.emit('new user', 'new user connection');
-
-  socket.on('update location' , function(user) {
-    
-    socket.broadcast.emit('location updated' , user);
-
-  });
-
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-});
-
-
-
-
-
-var port = process.env.PORT || 3000;
-http.listen(port, function(){
-  console.log('listening on *:3000');
-});
-
 // Setup database
 var databaseURL    = 'mongodb://localhost:27017/flash-app';
-mongoose.connect(databaseURL);
+mongoose.connect(process.env.MONGODB_URI || databaseURL);
 
 // Require routes
 var routes         = require('./config/routes');
@@ -69,6 +37,46 @@ app.use(methodOverride(function(req, res){
   }
 }));
 app.use(routes);
+
+
+
+
+
+
+
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+
+
+  io.emit('new user', 'new user connection');
+
+  socket.on('update location' , function(user) {
+    
+    socket.broadcast.emit('location updated' , user);
+    console.log(user);
+    console.log('location updated');
+
+  });
+
+
+
+
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
+
+
+
+
+
+var port = process.env.PORT || 3000;
+http.listen(port, function(){
+  console.log('listening on *:3000');
+});
+
 
 // Listen on the correct PORT
 // app.listen(process.env.PORT || 3000);

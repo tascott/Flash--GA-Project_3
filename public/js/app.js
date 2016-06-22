@@ -2,7 +2,6 @@ $(document).ready(function(){
 
   $("#logout-button" ).on("click", logout);
   
-
 });
 
 
@@ -11,7 +10,7 @@ function checkForSellerLogin(){
 
   if (token) {
     $("#menuBar").append("<li>Welcome seller: " + currentSeller().username + ", </li>");
-    console.log(currentSeller());
+    // console.log(currentSeller());
     //hooray we are logged in
     console.log("HEY A SELLER IS LOGGED IN!")
     $.ajaxSetup({
