@@ -1,5 +1,6 @@
 var Ticket = require("../models/ticket");
 var Seller = require("../models/seller");
+var Buyer = require("../models/buyer");
 
 function ticketsIndex(req, res){
   Ticket.find({}, function(err, tickets) {
@@ -10,15 +11,23 @@ function ticketsIndex(req, res){
 }
 
 function ticketsCreate(req, res){
-  var ticket = new Ticket(req.body.ticket);
-  ticket.save(function(err){
+  
+  var newTicket = new Ticket({
+    event: req.body.ticket.event,
+    date: req.body.ticket.date,
+    price: req.body.ticket.price
+  })
+
+  newTicket.save(function(err){
     if (err) return res.status(500).send(err);
-    var name = req.body.ticket.seller;
-    Seller.findOne({ name: name }, function(err, seller){
-       seller.tickets.push(ticket);
-       seller.save();
+
+    var id = req.body.ticket.id;
+      
+    Seller.findByIdAndUpdate(id, { $push: { tickets: newTicket._id}  }, function(err, seller){
+      if (err) return res.status(404).json({message : err});
+      return res.status(200).send(newTicket);
+
     });
-    res.status(201).send(ticket)
   });
 }
 
@@ -47,9 +56,9 @@ function ticketsUpdate(req, res){
 function ticketsDelete(req, res){
   var id = req.params.id;
 
-  Ticket.remove({ _id: id }, function(err) {
+  Ticket.findByIdAndRemove({ _id: id }, function(err) {
     if (err) return res.status(500).send(err);
-    res.status(200)
+    res.status(200).json({ message: "Ticket deleted"});
   })
 }
 
