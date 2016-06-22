@@ -1,7 +1,9 @@
 $(document).ready(function(){
 
-getSellers();
-checkForSellerLogin();
+
+  if(checkForSellerLogin()){
+    getSellers();
+  } 
 
 
 $("form#new-seller").on("submit", createSeller);

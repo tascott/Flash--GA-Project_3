@@ -1,7 +1,14 @@
 $(document).ready(function(){
 
+  // NEED TO RETURN TRUE IF LOAGGED IN
+  
+  
+
+if(checkForBuyerLogin()){
   getBuyers();
-  checkForBuyerLogin();
+} 
+
+  // checkForBuyerLogin();
 
 
 

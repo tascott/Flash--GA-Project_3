@@ -10,10 +10,52 @@ var buyersController = require('../controllers/buyersController');
 var ticketsController = require('../controllers/ticketsController');
 var sellersController = require('../controllers/sellersController');
 
+
+function checkForToken(req,res,next){
+    if(!req.headers.authorisation) return res.status(401).json({ message: 'NO BUYER TOKEN: Unauthorised'});
+
+    console.log("Whagt?");
+
+    var buyerToken = req.headers.authorisation.replace('Bearer ', '');
+
+      jwt.verify(buyerToken , buyerSecret , function(err, user){
+      if(!user) return res.status(401).json({ message: 'Invalid Token'}); 
+      req.user =user;
+      next();
+  });
+
+}
+
+
+function authoriseBuyer(req,res, next) {
+
+    if(req.user.buyer) {
+      next();
+    } else {
+      res.status(403);
+    }
+
+}
+
+function authoriseSeller(req,res, next) {
+
+    if(!req.user.buyer) {
+      next();
+    } else {
+      res.status(403);
+    }
+
+}
+
+
 router.route('/')
   .get(buyersController.buyersIndex)
+
+  router.post('/buyer-login', buyerAuthenticationController.login );
+  router.post('/buyer-register', buyerAuthenticationController.register );
  
 router.route('/buyers')
+    .all(checkForToken, authoriseSeller)
   .get(buyersController.buyersIndex)
   .post(buyersController.buyersCreate)
 
@@ -32,6 +74,7 @@ router.route('/tickets/:id')
   .delete(ticketsController.ticketsDelete)
 
 router.route('/sellers')
+  .all(checkForToken, authoriseBuyer)
   .get(sellersController.sellersIndex)
   .post(sellersController.sellersCreate)
 
@@ -40,8 +83,7 @@ router.route('/sellers/:id')
   .patch(sellersController.sellersUpdate)
   .delete(sellersController.sellersDelete)
 
-  router.post('/buyer-login', buyerAuthenticationController.login );
-  router.post('/buyer-register', buyerAuthenticationController.register );
+  
 
   router.post('/seller-login', sellerAuthenticationController.login );
   router.post('/seller-register', sellerAuthenticationController.register );
