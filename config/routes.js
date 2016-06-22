@@ -26,6 +26,9 @@ router.route('/tickets')
   .get(ticketsController.ticketsIndex)
   .post(ticketsController.ticketsCreate)
 
+router.route('/transfer/:id')
+  .post(ticketsController.ticketsTransfer)
+
 router.route('/tickets/:id') 
   .get(ticketsController.ticketsShow)
   .patch(ticketsController.ticketsUpdate)

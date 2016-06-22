@@ -119,14 +119,30 @@ function addTicket2(ticket){
     console.log("SELLER ID: "+ id);
 
     // GET THE TICKET
+    // $.ajax({
+    //   method: 'GET',
+    //   url: 'http://localhost:3000/tickets/'+ticket
+    // }).done(function(myticket){
+    //   console.log("BUYER ID: "+ myticket.buyerID);
+
     $.ajax({
-      method: 'GET',
-      url: 'http://localhost:3000/tickets/'+ticket
+      method: 'POST',
+      url: 'http://localhost:3000/transfer/'+ticket,
+      data: { package: {
+        "seller": id
+      }}
     }).done(function(myticket){
-      console.log("BUYER ID: "+ myticket.buyerID);
 
-      // 
+          // $.ajax({
+          //   method: 'POST'
+          //   url:    'http://localhost:3000/buyes'+id
+          //   data:   , 
 
+          // }).done(function(user){
+
+          // });
+
+      console.log(myticket)
       // $.each(data, function(index, ticket){
       //   addTicket2(ticket);
       // });
