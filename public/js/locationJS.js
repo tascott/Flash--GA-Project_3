@@ -1,9 +1,9 @@
-$(document).ready(function(){
-
-
-$("#getLocation" ).on("click", getMyLocation);
-
 var map;
+
+// $(document).ready(function(){
+
+// getMyLocation();
+
 
 
 function getMyLocation() {
@@ -26,7 +26,7 @@ function displayLocation(position) {
 
   showMap(latLng);
   createMarker(latLng);
-  getSellerLocations();
+  // getSellerLocations();
 
   var div = document.getElementById('location');
   div.innerHTML = 'You are at Latitude: ' + latitude + ', Longitude: ' + longitude;
@@ -44,20 +44,32 @@ function showMap(latLng) {
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
 
-function getSellerLocations(){
-    console.log(map);
-    var ajax = $.get('http://localhost:3000/sellers')
-      .done(function(data) {
-        $.each(data, function(index, user) {
-          var latLng = new google.maps.LatLng(user.latitude, user.longitude)
+// function getSellerLocations(){
+//     var ajax = $.get('http://localhost:3000/sellers')
+//       .done(function(data) {
+//         $.each(data, function(index, user) {
+//           var latLng = new google.maps.LatLng(user.latitude, user.longitude)
 
-          var marker = new google.maps.Marker({
-            position: latLng,
-            map: map
-          });
-        });
-    });
-}
+//           var marker = new google.maps.Marker({
+//             position: latLng,
+//             map: map
+//           });
+//         });
+//     });
+// }
+
+
+
+// function initAutocomplete() {
+//   var map = new google.maps.Map(document.getElementById('map-canvas'), {
+//     center: {lat: -33.8688, lng: 151.2195},
+//     zoom: 13,
+//     mapTypeId: google.maps.MapTypeId.ROADMAP
+//   });
+
+// }
+
+// });
 
 function createMarker(latLng) {
   var markerOptions = {
@@ -85,14 +97,3 @@ function addInfoWindow(marker, latLng, content){
     infoWindow.open(map);
   });
 }
-
-function initAutocomplete() {
-  var map = new google.maps.Map(document.getElementById('map-canvas'), {
-    center: {lat: -33.8688, lng: 151.2195},
-    zoom: 13,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-
-}
-
-});
