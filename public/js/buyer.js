@@ -42,7 +42,7 @@ function currentBuyer() {
   // GET ALL BUYERS
 
   function getBuyers(){
-    var ajax = $.get('http://localhost:3000/buyers')
+    var ajax = $.get('/buyers')
     .done(function(data){
       $.each(data, function(index, buyer){
         addBuyer(buyer);
@@ -75,7 +75,7 @@ function currentBuyer() {
     event.preventDefault();
 
     $.ajax({
-      url:'http://localhost:3000/buyer-register',
+      url:'/buyer-register',
       type:'post',
       data: { buyer: {
         "firstName": $("input#buyerfirstname").val(),
@@ -113,7 +113,7 @@ function currentBuyer() {
     $('#buyers').slideUp();
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3000/buyers/'+$(this).data().id
+      url: '/buyers/'+$(this).data().id
     }).done(function(buyer){
       $('#show').prepend("<div class='buyer-tile' data-id="+ buyer._id +
         "><h2 id='username'>" +
@@ -139,7 +139,7 @@ function currentBuyer() {
   function editBuyer(){
     $.ajax({
       method: 'get',
-      url: 'http://localhost:3000/buyers/'+$(this).data().id
+      url: '/buyers/'+$(this).data().id
     }).done(function(buyer){
       $("input#edit-firstName").val(buyer.firstName),
       $("input#edit-lastName").val(buyer.lastName),
@@ -162,7 +162,7 @@ function currentBuyer() {
     };
     $.ajax({
       method: 'patch',
-      url: 'http://localhost:3000/buyers/'+$(this).data().id,
+      url: '/buyers/'+$(this).data().id,
       data: buyer
     }).done(function(data){
       // not ideal
@@ -175,7 +175,7 @@ function currentBuyer() {
   function removeBuyer(){
     event.preventDefault();
     $.ajax({
-      url:'http://localhost:3000/buyers/'+$(this).data().id,
+      url:'/buyers/'+$(this).data().id,
       type:'delete'
     });
     $(this).parent().remove();

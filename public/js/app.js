@@ -41,7 +41,7 @@ function logSellerIn(){
   event.preventDefault();
 
   $.ajax({
-    url: 'http://localhost:3000/seller-login',
+    url: '/seller-login',
     type: 'post',
     data: { seller : {
       "email": $("input#login-seller-userName").val(),
@@ -68,7 +68,7 @@ function logBuyerIn(){
   event.preventDefault();
 
   $.ajax({
-    url: 'http://localhost:3000/buyer-login',
+    url: '/buyer-login',
     type: 'post',
     data: { buyer : {
       "email": $("input#login-buyer-userName").val(),

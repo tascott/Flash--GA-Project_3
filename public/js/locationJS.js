@@ -45,7 +45,7 @@ function showMap(latLng) {
 }
 
 // function getSellerLocations(){
-//     var ajax = $.get('http://localhost:3000/sellers')
+//     var ajax = $.get('/sellers')
 //       .done(function(data) {
 //         $.each(data, function(index, user) {
 //           var latLng = new google.maps.LatLng(user.latitude, user.longitude)
