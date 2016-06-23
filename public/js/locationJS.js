@@ -2,6 +2,8 @@ var map;
 
 var markers = [];
 
+
+
 // // Adds a marker to the map and push to the array.
 // function addMarker(location) {
 //   var marker = new google.maps.Marker({
@@ -116,6 +118,7 @@ function showMap(latLng) {
     center: latLng,
     zoom: 18,
     mapTypeId: google.maps.MapTypeId.ROADMAP
+
   };
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
