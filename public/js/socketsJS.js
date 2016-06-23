@@ -2,7 +2,6 @@ $(document).ready(function(){
 
 
 
-var sellers = [];
 
 
 
@@ -33,9 +32,6 @@ if (!!currentSeller() || !!currentBuyer()) {
 
   });
 
-  // position.coords.latitude;
-  // position.coords.longitude;
-
   // Creates markers - for now....
   setInterval( function(){
     navigator.geolocation.getCurrentPosition(function(location){
@@ -53,34 +49,21 @@ if (!!currentSeller() || !!currentBuyer()) {
 
 socket.on('location updated' , function(user){
  
-  // clearMarkers();
   var latLng = new google.maps.LatLng(user.latitude, user.longitude);
   console.log(user.username + "'s location' = " + latLng);
-
-  // Show map - my currentloaction - OUTSIDE the on but on te 
-
-  // showMap(latLng);
-
-
 
  var contentString = "Tickets from "+ user.username + " <input type='button' class = 'show' value='See List' data-id='"+ user.id+ "'>"
  var infowindow = new google.maps.InfoWindow({
     content: contentString
   });
 
+ deleteMarkers();
+ addMarker(latLng);
+ setMapOnAll(map);
 
- var marker = new google.maps.Marker({
-     position: latLng,
-     map: map,
-     title: 'marker'
-   });
-   marker.addListener('click', function() {
-     infowindow.open(map, marker);
-     console.log("infowindow clicked")
-      });
+  console.log(markers);
 
-
-    }); //socket.on(update location)
+    });
 
 } else {
 
