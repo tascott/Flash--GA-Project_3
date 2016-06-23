@@ -56,7 +56,7 @@ router.route('/')
   router.post('/buyer-register', buyerAuthenticationController.register );
  
 router.route('/buyers')
-    .all(checkForToken, authoriseSeller) 
+    // .all(checkForToken, authoriseSeller) 
   .get(buyersController.buyersIndex)
   .post(buyersController.buyersCreate)
 
@@ -78,7 +78,7 @@ router.route('/tickets/:id')
   .delete(ticketsController.ticketsDelete)
 
 router.route('/sellers')
-  .all(checkForToken, authoriseBuyer)
+  // .all(checkForToken, authoriseBuyer)
   .get(sellersController.sellersIndex)
   .post(sellersController.sellersCreate)
 

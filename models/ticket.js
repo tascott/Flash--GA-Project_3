@@ -5,7 +5,8 @@ var ticketSchema = mongoose.Schema({
   date: { type: Date, required: true },
   price: { type: Number, required: true },
   buyerID : {type: String},
-  hold : {type: Boolean}
+  hold : {type: Boolean},
+  sold: {type: Boolean}
 });
 
 module.exports = mongoose.model('Ticket', ticketSchema);

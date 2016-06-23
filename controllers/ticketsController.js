@@ -40,6 +40,10 @@ function ticketsTransfer(req, res){
         if (err) return res.status(500).send(err);
         if (!ticket) return res.status(404).send(err);
 
+        ticket.sold = true;
+
+        ticket.save();
+
         // res.status(200).send(ticket);
 
           Buyer.findByIdAndUpdate(ticket.buyerID, { $push: { tickets: ticket._id}  }, function(err, buyer){

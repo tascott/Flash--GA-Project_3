@@ -41,7 +41,7 @@ function checkForSellerLogin(){
   var token = window.localStorage.getItem('sellerToken');
 
   if (token) {
-    $("#menuBar").append("<li>Welcome seller: " + currentSeller().username + ", </li>");
+    $("#menuBar").append("<li class='show' data-id='"+currentSeller()._id+"'>Welcome seller: " + currentSeller().username + ", </li>");
     // console.log(currentSeller());
     //hooray we are logged in
     console.log("HEY A SELLER IS LOGGED IN!")
@@ -57,7 +57,17 @@ function checkForBuyerLogin(){
   var token = window.localStorage.getItem('buyerToken');
 
   if (token) {
-    $("#menuBar").append("<li>Welcome buyer: " + currentBuyer().username + ", </li>");
+    // $("#menuBar").append("<li class='buyershow' data-id='"+currentBuyer()._id+"'>Welcome buyer: " + currentBuyer().username + ", </li>");
+
+
+    $("#menuBar").append("<li class='buyershow' data-id='"+currentBuyer()._id+"'>Buyer: " + currentBuyer().username + ", </li>");
+
+
+    // $("#menuBar").prepend("<li</li>").html( "<a class='buyershow' data-id='"+currentBuyer()._id+"' href='#'>Welcome Buyer: "+ currentBuyer().username+"</a>")
+
+
+
+
     console.log(currentBuyer());
     //hooray we are logged in
     console.log("BUYER IS LOGGED IN, WAHOOOOOOO!")

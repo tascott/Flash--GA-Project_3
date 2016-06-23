@@ -7,6 +7,7 @@ $(document).ready(function(){
 if(checkForSellerLogin()){
   console.log("THERE IS A SELLER LOGIN")
   getBuyers();
+  getSellers();
 } 
 
   // checkForBuyerLogin();
@@ -22,7 +23,7 @@ if(checkForSellerLogin()){
 
 
   $("body").on("click", ".buyerdelete", removeBuyer);
-  $('body').on('click', '.buyershow', showBuyerProfile)
+  $('body').on('click', '.buyershow', showBuyerProfileMike)
   $('body').on('click', '.buyeredit', editBuyer);
 
   });
@@ -121,6 +122,7 @@ function currentBuyer() {
 
   function showBuyerProfile(){
     $('#buyers').slideUp();
+    console.log("You clicked a buyer profile: " + $(this).data().id)
     $.ajax({
       method: 'GET',
       url: '/buyers/'+$(this).data().id
@@ -141,6 +143,42 @@ function currentBuyer() {
         $('#tickets').slideDown()
       }, 600);
     });
+  }
+
+  // SHOW BUYERS
+
+  function showBuyerProfileMike(){
+    $('#sellers').slideUp();
+      $('#showAndTickets').toggle();
+      $.ajax({
+        method: 'GET',
+        url: '/buyers/'+$(this).data().id
+      }).done(function(buyer){
+        $('#show').prepend("<div class='seller-tile' data-id="+ buyer._id +
+          "><h2 id='username'>" +
+            buyer.lastName + "</h2><p> " 
+            + buyer.userName + "</p><a href='https://github.com/"+ 
+            buyer.phone +"'>Phone</a> | <a href='"
+             +
+            "'>Phone</a></div>");
+        $.each(buyer.tickets, function(index, ticket){
+          // If I'm a seller I want to see the buyers tickets
+          if(currentBuyer()){
+            // RENAME THIS LATER
+            addTicketMike(ticket)
+          // if I'm a buyer I want to see the seller action on my ticket
+          } else if (currentSeller()) {
+            addTicketForBuyer(ticket)
+          } else {
+
+          }
+        })
+        $("#tickets").append("<div class='ticket-tile'><h2><a id='addTicket' href='#'>Add a ticket +</a></h2></div>")
+        setTimeout(function(){
+          $('#show').slideDown()
+          $('#tickets').slideDown()
+        }, 600);
+      });
   }
 
 

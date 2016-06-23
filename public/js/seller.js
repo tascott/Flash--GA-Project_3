@@ -4,6 +4,7 @@ $(document).ready(function(){
   if(checkForBuyerLogin()){
     console.log("THERE IS A BUYER LOGGED IN")
     getSellers();
+    getBuyers();
   } 
 
 
