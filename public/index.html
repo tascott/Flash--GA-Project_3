@@ -19,17 +19,7 @@
   <script type="text/javascript" src="./js/socketsJS.js"></script>
   <!-- <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> -->
   <style>
- 
 
-    body { font: 13px Helvetica, Arial; }
-    form { background: #000; padding: 3px; width: 100%; position: relative; bottom: 0;}
-    form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-
-    form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-    #messages { list-style-type: none; margin: 0; padding: 0; }
-    #messages li { padding: 5px 10px; }
-    #messages li:nth-child(odd) { background: #eee; }
-    #chatHolder { width: 500px; height: 500px; border: 1px solid black;}
 
   </style>
     
@@ -47,6 +37,7 @@
       <li><a id="buyer-index-button" href="#">All Buyers</a></li>
       <li><a id="seller-login-button" href="#">Login Seller</a></li>
       <li><a id="buyer-login-button" href="#">Login Buyer</a></li>
+      <li><a id="ticket-index-button" href="#">All Tickets</a></li>
       <li><a id="logout-button" href="#">Logout</a></li>
     </ul>
   </nav>
@@ -124,48 +115,36 @@
 </form>
 
 
-<div id="mainBanner">
+<div id="frontBody">
+
+  <div id="dropDownTop">
+    <div id="sellers">
+    </div>
+    <div id="buyers">
+    </div>
+
+  <div id="showAndTickets">
+    <div id="show">
+    </div>
+    <div id="tickets"> 
+    </div>
+  </div>
+  </div><!-- dropdowntop -->
+
+  <div id="frontInfoHolder">
+    <img src="http://emojipop.net/data/images/emoji_set_297.png">
+    <h1>Buy and sell last minute <br> tickets to sought-after events</h1>
+    <button id="seeTicketsButton" class="btn">See Tickets</button></br>
+    <button class="btn">Sign Up</button>
+  </div>
+
+  <div id="map-canvas">
+  </div>
+  <div id="ticketIndex">
+  </div>
+</div><!-- frontBody -->
 
 
-
-<div id="sellers">
-</div>
-
-<div id="buyers">
-</div>
-
-<div id="show">
-</div>
-
-<div id="tickets">
-</div>
-
-<div id="ticketIndex">
-</div>
-
-
-<img src="http://emojipop.net/data/images/emoji_set_297.png">
-<h1>Buy and sell last minute <br> tickets to sought-after events</h1>
-<button id="seeTicketsButton" class="btn">See Tickets</button>
-<button class="btn">Sign Up</button>
-
-</div>
-
-
-<button id="getLocation" class="btn">Get My Location</button>
-<div id="map-canvas">
-</div>
-
-<div id="location">
-<h2></h2>
-</div>
-
-<!-- <div id="chatHolder">
-  <ul id="messages"></ul>
-  <form action="">
-    <input id="m" autocomplete="off" /><button>Send</button>
-  </form>
-  </div> -->
 
 <script async defer
      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_BECvBlfI-E7bfu7fcXcnAOowGWnQyyc&libraries=places">

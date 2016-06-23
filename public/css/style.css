@@ -15,18 +15,45 @@ html, body {
   padding: 0px;
 }
 #map-canvas {
-  height: 450px;
-  width: 450px;
-  margin: 2%;
-  margin: 0 auto;
+  height: 100vh;
+  width: 100%;
   background: url(http://i.imgur.com/bhpdyVT.png) no-repeat center center;
+  background-size: cover;
+  border: 1px solid black;
+
 }
+
+#frontBody {
+  height: 100%;
+  width: 100%;
+}
+
+
+#frontInfoHolder {
+  padding-top: 130px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2;
+  text-align: center;
+}
+
+
+#dropDownTop {
+
+}
+
+
 /*FORM*/
 #new-seller, #edit-seller, #new-ticket, #new-buyer, #edit-buyer {
   display: none;
   padding: 10px;
   margin-bottom: 15px;
 }
+
+
 #new-seller {
   max-width: 1100px;
   overflow: hidden;
@@ -148,18 +175,13 @@ header nav ul li a {
   color: black;
 }
 /*Main Front Page Styling*/
-#mainBanner {
-  background: url(http://i.imgur.com/bhpdyVT.png) no-repeat center center;
-  background-size: cover;
-  width: 100%;
-  min-height: 100vh;
+
+.z_index {
+  z-index: 1;
 }
-#mainBanner img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 15px;
-}
+
+
+
 /*INDEX SELLERS*/
 #sellers {
   overflow: hidden;
@@ -167,11 +189,14 @@ header nav ul li a {
 }
 #ticketIndex {
   display: none;
-  max-width: 400px;
-  max-height: 600px;
+  width: 290px;
+  height: 100vh;
   overflow: scroll;
   position: absolute;
-  left: 0;
+  z-index: 2;
+  right: 0;
+  top: 70px;
+  
 }
 #ticketIndex .seller-tile {
   border: 1px solid black; 
@@ -210,15 +235,30 @@ header nav ul li a {
   margin: 0 0 15px 0;
 }
 /*SHOW SELLER/BUYER*/
-#show {
+/*#show {
+  border: 3px solid blue;
   display: none;
-  width: 310px;
-  float: left;
-}
-#tickets {
+  width: 290px;
+  height: 100vh;
+  overflow: scroll;
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  top: 70px;
+
+}*/
+#showAndTickets {
+  /*border: 3px solid black;*/
   display: none;
-  overflow: hidden;
-  padding-left: 15px;
+  width: 290px;
+  height: 100vh;
+  overflow: scroll;
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  top: 70px;
+  /*overflow: hidden;*/
+  /*padding-left: 15px;*/
 }
 .ticket-tile {
   background-color: white;
@@ -250,14 +290,5 @@ header nav ul li a {
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
 }
-#map {
-  width: 800px;
-  height: 800px;
-}
-  body { font: 13px Helvetica, Arial; }
-  form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-  form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-  form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-  #messages { list-style-type: none; margin: 0; padding: 0; }
-  #messages li { padding: 5px 10px; }
-  #messages li:nth-child(odd) { background: #eee; }
+
+ 

@@ -12,7 +12,7 @@ $("#seller-login-button" ).on("click", toggleSellerLoginForm);
 $("#seller-index-button" ).on("click", toggleShowSellers);
 
 $("body").on("click", ".delete", removeSeller);
-$('body').on('click', '.show', showSellerProfileMike)
+$('body').on('click', '.show', showSellerProfileMike) 
 $('body').on('click', '.edit', editSeller);
 
 
@@ -48,16 +48,38 @@ function getSellers(){
 
 //INDEX - SELLERS
 function toggleShowSellers(){
-  $("#show").slideUp("slow");
-  $("#tickets").slideUp("slow");
-  $("#buyers").slideUp("slow");
 
-  setTimeout(function(){
-    $("#show").html(" ");
-    $("#tickets").html(" ");
-    $('#sellers').toggle("slow")
-  }, 600);
+        toggleAll();
+        $('#sellers').toggle("slow");
+  
+  // $("#show").slideUp("slow");
+  // $("#tickets").slideUp("slow");
+  // $("#buyers").slideUp("slow");
+
+  // setTimeout(function(){
+  //   $("#show").html(" ");
+  //   $("#tickets").html(" ");
+  //   $('#sellers').toggle("slow")
+  // }, 600);
 }
+
+// function toggleAll(){
+//   console.log("toggled all")
+//   $("#show").slideUp("slow");
+//   $("#tickets").slideUp("slow");
+//   $("#showAndTickets").slideUp("slow");
+//   $("#dropDownTop").slideUp("slow");
+//   $("#buyers").slideUp("slow");
+//   $("#sellers").slideUp("slow");
+//   $("#form#new-buyer").slideUp("slow");
+//   $("#form#edit-buyer").slideUp("slow");
+//   $("#form#new-seller").slideUp("slow");
+//   $("#form#edit-seller").slideUp("slow");
+//   $("#form#login-buyer").hide();
+//   $("#form#login-seller").hide();
+//   $("#frontInfoHolder").slideUp("slow");
+//   $("#ticketIndex").slideUp("slow");
+// };
 
 
 
@@ -147,6 +169,7 @@ function showSellerProfile(){
 
 function showSellerProfileMike(){
   $('#sellers').slideUp();
+  $('#showAndTickets').toggle();
   $.ajax({
     method: 'GET',
     url: '/sellers/'+$(this).data().id

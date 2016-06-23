@@ -4,19 +4,6 @@ var sellers = [];
 
 
 
-function createMarker(latLng) {
-  console.log("Yes it's")
-  var markerOptions = {
-    position: latLng,
-    map: map,
-    animation: google.maps.Animation.DROP,
-    clickable: true
-  }
-
-  var marker = new google.maps.Marker(markerOptions);
-
-  var content = 'You are here: ' + latLng.lat() + ', ' + latLng.lng();
-}
 
 console.log(!!currentSeller())
 // var id = currentSeller()._id;
@@ -24,20 +11,17 @@ console.log(!!currentSeller())
 
 if (!!currentSeller()) {
   var socket = io();
-  console.log()
+
   var id = currentSeller()._id;
   console.log('you are user ' + currentSeller().username);
-  socket.emit('new seller' , id);
 
-
-
+  // socket.emit('new seller' , id);
 
   setInterval( function(){
 
     navigator.geolocation.getCurrentPosition(function(location){
-      console.log(location);
     socket.emit('update location' , {
-      id : id , 
+      id : id, 
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
       username: currentSeller().username
@@ -48,32 +32,32 @@ if (!!currentSeller()) {
 
 
 
-  // navigator.geolocation.watchPosition(function(location){
-  //     console.log(location);
-  //   socket.emit('update location' , {
-  //     id : id , 
-  //     latitude: location.coords.latitude,
-  //     longitude: location.coords.longitude,
-  //     username: currentSeller().username
-  //   });
-
-  // });
+socket.on('location updated' , function(user){
+ var latLng = new google.maps.LatLng(user.latitude, user.longitude);
+ console.log(user.username + "'s location' = " + latLng);
+ showMap(latLng);
 
 
 
-  socket.on('location updated' , function(user){
+/////////////////////////////////////////////
+ var contentString = "Tickets from "+ user.username + " <input type='button' class = 'show' value='See List' data-id='"+ user.id+ "'>"
+ var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+ var marker = new google.maps.Marker({
+     position: latLng,
+     map: map,
+     title: 'marker'
+   });
+   marker.addListener('click', function() {
+     infowindow.open(map, marker);
+     console.log("infowindow clicked")
+      });
+/////////////////////////////////////////////
 
-      // var marker = sellers[user.id];
-      // marker.location = user.location;
 
-      var latLng = new google.maps.LatLng(user.latitude, user.longitude);
 
-      console.log(user.username + "latlang = " + latLng);
-
-      showMap(latLng);
-      createMarker(latLng);
-
-    });
+    }); //socket.on(update location)
 
 } else {
 
@@ -86,9 +70,6 @@ if (!!currentSeller()) {
   });
 
   socket.on('location updated' , function(user){
-
-      // var marker = sellers[user.id];
-      // marker.location = user.location;
 
       var latLng = new google.maps.LatLng(user.latitude, user.longitude);
       createMarker(latLng);

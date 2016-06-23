@@ -1,8 +1,45 @@
 $(document).ready(function(){
 
   $("#logout-button" ).on("click", logout);
+  // $("#mainBanner" ).on("click", hideBanner);
   
+
+  function hideBanner(){
+    $("#mainBanner").toggle();
+    console.log("banner hidden");
+    $( "#mainBanner" ).addClass("z_index")
+
+
+
+  }
+
+
 });
+
+
+function toggleAll(){
+  console.log("toggled all")
+  $("#show").slideUp("slow");
+  $("#tickets").slideUp("slow");
+  $("#showAndTickets").slideUp("slow");
+  $("#dropDownTop").slideUp("slow");
+  $("#buyers").slideUp("slow");
+  $("#sellers").slideUp("slow");
+  $("#form#new-buyer").slideUp("slow");
+  $("#form#edit-buyer").slideUp("slow");
+  $("#form#new-seller").slideUp("slow");
+  $("#form#edit-seller").slideUp("slow");
+  $("#form#login-buyer").slideUp("slow");
+  $("#form#login-seller").slideUp("slow");
+  $("#frontInfoHolder").slideUp("slow");
+  $("#ticketIndex").slideUp("slow");
+};
+
+
+
+
+ 
+  
 
 
 function checkForSellerLogin(){

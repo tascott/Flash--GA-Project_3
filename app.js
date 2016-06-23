@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI || databaseURL);
 
 // Require routes
 var routes         = require('./config/routes');
-
+  
 // Setup Middleware
 app.use(cors());
 app.use(morgan('dev'));
@@ -49,18 +49,22 @@ io.on('connection', function(socket){
   console.log('a user connected');
 
 
-  io.emit('new user', 'new user connection');
+  // io.emit('new user', 'new user connection');
+
+
+
+
+
+
 
   socket.on('update location' , function(user) {
-    
+    //the user is an abject from socket.emit.updatelocation
+    //sending info back
     socket.broadcast.emit('location updated' , user);
     console.log(user);
     console.log('location updated');
 
   });
-
-
-
 
   socket.on('disconnect', function(){
     console.log('user disconnected');

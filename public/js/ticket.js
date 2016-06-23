@@ -3,6 +3,9 @@ $(document).ready(function(){
   getTickets();
 
   $("form#new-ticket").on("submit", createTicket);
+  $("#ticket-index-button").on("click", toggleShowTickets);
+
+
   $('body').on('click', '#seeTicketsButton', toggleShowTickets)
   $('body').on('click', '#addTicket', toggleAddTicket)
 
@@ -31,6 +34,7 @@ function toggleShowTickets(){
   $("#sellers").slideUp("slow");
   $("#buyers").slideUp("slow");
   $("#ticketIndex").toggle("slow");
+  $("#frontInfoHolder").slideUp("slow");
 
 
   setTimeout(function(){

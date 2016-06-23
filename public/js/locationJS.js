@@ -1,9 +1,5 @@
 var map;
 
-// $(document).ready(function(){
-
-// getMyLocation();
-
 
 
 function getMyLocation() {
@@ -28,8 +24,7 @@ function displayLocation(position) {
   createMarker(latLng);
   // getSellerLocations();
 
-  var div = document.getElementById('location');
-  div.innerHTML = 'You are at Latitude: ' + latitude + ', Longitude: ' + longitude;
+
  
 }
 
@@ -40,7 +35,6 @@ function showMap(latLng) {
     zoom: 18,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
 
@@ -71,29 +65,6 @@ function showMap(latLng) {
 
 // });
 
-function createMarker(latLng) {
-  var markerOptions = {
-    position: latLng,
-    map: map,
-    animation: google.maps.Animation.DROP,
-    clickable: true
-  }
 
-  var marker = new google.maps.Marker(markerOptions);
 
-  var content = 'You are here: ' + latLng.lat() + ', ' + latLng.lng();
-  addInfoWindow(marker, latLng, content);
-}
 
-function addInfoWindow(marker, latLng, content){
-  var infoWindowOptions = {
-    content: content,
-    position: latLng
-  };
-
-  var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-
-  google.maps.event.addListener(marker, 'click', function() {
-    infoWindow.open(map);
-  });
-}
