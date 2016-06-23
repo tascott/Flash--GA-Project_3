@@ -6,7 +6,7 @@ $(document).ready(function(){
   $("#ticket-index-button").on("click", toggleShowTickets);
 
 
-  $('body').on('click', '#seeTicketsButton', toggleShowTickets)
+  // $('body').on('click', '#seeTicketsButton', toggleShowTickets)
   $('body').on('click', '#addTicket', toggleAddTicket)
 
   $('body').on('click', '.hold', holdTicket);

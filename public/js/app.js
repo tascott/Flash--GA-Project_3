@@ -66,10 +66,10 @@ function checkForBuyerLogin(){
   if (token) {
 
 
-    $("#menuBar").prepend("<a href='#'><li class='show' data-id='"+currentBuyer()._id+"'>Welcome seller: " + currentBuyer().username + "</a>");
+    $("#menuBar").prepend("<a href='#'><li class='buyershow' data-id='"+currentBuyer()._id+"'>Welcome buyer: " + currentBuyer().username + "</a>");
 
 
-    console.log(currentBuyer());
+    console.log("TEST: "+ currentBuyer().username);
     //hooray we are logged in
     console.log("BUYER IS LOGGED IN, WAHOOOOOOO!")
     $.ajaxSetup({
