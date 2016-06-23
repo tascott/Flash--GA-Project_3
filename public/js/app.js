@@ -41,11 +41,14 @@ function clearAll() {
 
 
 
+
 function checkForSellerLogin(){
   var token = window.localStorage.getItem('sellerToken');
 
   if (token) {
-    $("#menuBar").append("<li class='show' data-id='"+currentSeller()._id+"'>Welcome seller: " + currentSeller().username + ", </li>");
+    $("#menuBar").prepend("<a href='#'><li class='show' data-id='"+currentSeller()._id+"'>Welcome seller: " + currentSeller().username + "</a>");
+
+
     // console.log(currentSeller());
     //hooray we are logged in
     console.log("HEY A SELLER IS LOGGED IN!")
@@ -61,15 +64,9 @@ function checkForBuyerLogin(){
   var token = window.localStorage.getItem('buyerToken');
 
   if (token) {
-    // $("#menuBar").append("<li class='buyershow' data-id='"+currentBuyer()._id+"'>Welcome buyer: " + currentBuyer().username + ", </li>");
 
 
-    $("#menuBar").append("<li class='buyershow' data-id='"+currentBuyer()._id+"'>Buyer: " + currentBuyer().username + ", </li>");
-
-
-    // $("#menuBar").prepend("<li</li>").html( "<a class='buyershow' data-id='"+currentBuyer()._id+"' href='#'>Welcome Buyer: "+ currentBuyer().username+"</a>")
-
-
+    $("#menuBar").prepend("<a href='#'><li class='show' data-id='"+currentBuyer()._id+"'>Welcome seller: " + currentBuyer().username + "</a>");
 
 
     console.log(currentBuyer());

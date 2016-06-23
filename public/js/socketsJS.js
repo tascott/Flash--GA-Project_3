@@ -38,7 +38,7 @@ socket.on('location updated' , function(user){
   });
 
  
- addMarker(latLng , user.id);
+ addMarker(latLng , user.id, user.username);
  //setMapOnAll(map);
 
 

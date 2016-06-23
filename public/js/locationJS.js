@@ -27,7 +27,20 @@ function loadTheMap(){
   });
 }
 
-function addMarker(location , id) {
+function addMarker(location , id, username) {
+
+  var contentString = '<div id="infoModal">'+
+        '<h1 id="firstHeading" class="firstHeading">Tickets!</h1>'+
+        '<div id="bodyContent">'+  
+        'Check out the tickets to sell from '+
+        username + '  ' + 
+        "<input id='modalButton' type='button' class = 'show' value='See List' data-id="
+        + id + '>' +
+        '</div>'+ '</div>';
+
+  var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
 
   if(markers[id]) {
 
@@ -103,12 +116,6 @@ function displayLocation(position) {
   var latLng = new google.maps.LatLng(latitude, longitude);
 
   return latLng;
-
-  // showMap(latLng);
-  // createMarker(latLng);
-  // getSellerLocations();
-
-
  
 }
 
@@ -122,34 +129,3 @@ function showMap(latLng) {
   };
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
-
-// function getSellerLocations(){
-//     var ajax = $.get('/sellers')
-//       .done(function(data) {
-//         $.each(data, function(index, user) {
-//           var latLng = new google.maps.LatLng(user.latitude, user.longitude)
-
-//           var marker = new google.maps.Marker({
-//             position: latLng,
-//             map: map
-//           });
-//         });
-//     });
-// }
-
-
-
-// function initAutocomplete() {
-//   var map = new google.maps.Map(document.getElementById('map-canvas'), {
-//     center: {lat: -33.8688, lng: 151.2195},
-//     zoom: 13,
-//     mapTypeId: google.maps.MapTypeId.ROADMAP
-//   });
-
-// }
-
-// });
-
-
-
-

@@ -19,7 +19,6 @@ html, body {
   width: 100%;
   background: url(https://i.imgur.com/bhpdyVT.png) no-repeat center center;
   background-size: cover;
-  border: 1px solid black;
 
 }
 
@@ -28,7 +27,13 @@ html, body {
   width: 100%;
 }
 
+#infoModal {
 
+}
+
+#modalButton {
+  margin: 0 auto;
+}
 
 #frontInfoHolder img {
   height: 60%;
@@ -38,7 +43,11 @@ html, body {
   max-height: 50px;
 }
 
-
+#logoText {
+  margin: 0 auto;
+  font-size: 100%;
+  font-weight: bold;
+}
 
 /*FORM*/
 #edit-seller, #new-ticket, #edit-buyer {
@@ -262,6 +271,25 @@ ul{
 .nav .right li a:hover{
   background: #f2f2f2;
 }
+
+.nav .left{
+  float: left;
+  margin-right: 1em;
+}
+.nav .left li{
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 14px;
+  float: left;
+}
+.nav .left li a{
+  display: block;
+  padding: 9px 15px;
+  line-height: 30px;
+}
+.nav .left li a:hover{
+  background: #f2f2f2;
+}
+
 
 .toggle-nav{
   display: none;
