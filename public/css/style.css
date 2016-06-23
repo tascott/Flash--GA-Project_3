@@ -15,7 +15,7 @@ html, body {
   padding: 0px;
 }
 #map-canvas {
-  height: 100vh;
+  height: calc(100vh - 60px);
   width: 100%;
   background: url(https://i.imgur.com/bhpdyVT.png) no-repeat center center;
   background-size: cover;
@@ -29,43 +29,33 @@ html, body {
 }
 
 
-#frontInfoHolder {
-  padding-top: 130px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 2;
-  text-align: center;
+
+#frontInfoHolder img {
+  height: 60%;
 }
 
-
-#dropDownTop {
-
+#miniLogo {
+  max-height: 50px;
 }
+
 
 
 /*FORM*/
-#new-seller, #edit-seller, #new-ticket, #new-buyer, #edit-buyer {
+#edit-seller, #new-ticket, #edit-buyer {
   display: none;
   padding: 10px;
   margin-bottom: 15px;
 }
 
+#new-seller, #new-buyer {
+  max-width: 1100px;
+  overflow: hidden;
+  padding: 10px;
+  margin-bottom: 15px;
+}
 
-#new-seller {
-  max-width: 1100px;
-  overflow: hidden;
-  padding: 10px;
-  margin-bottom: 15px;
-}
-#new-buyer {
-  max-width: 1100px;
-  overflow: hidden;
-  padding: 10px;
-  margin-bottom: 15px;
-}
+
+
 input {
   display: inline-block;
 }
@@ -134,51 +124,7 @@ h2 a:hover {
 a:hover {
   text-decoration: underline;
 }
-/*HEADER*/
-header {
-  width: 100%;
-  background: white;
-  border-bottom: 1px solid #EDEEEE;
-}
-header nav {
-  max-width: 960px;
-  margin: 0 auto;
-  height: 60px;
-  line-height: 60px;
-}
-header nav ul {
-  height: 60px;
-  line-height: 60px;
-  font-size: 14px;
-}
-header nav ul li:first-child {
-  float: left;
-  padding: 0;
-  font-size: 25px;
-}
-header nav ul li {
-  font-weight: bold;
-  display: inline;
-  height: 60px;
-  line-height: 60px;
-  float: right;
-  padding: 0 10px;
-}
-header nav ul li:nth-child(2) {
-  padding: 0 0 0 10px;
-}
-header nav ul li a:hover {
-  text-decoration: none;
-}
-header nav ul li a {
-  text-decoration: none;
-  color: black;
-}
-/*Main Front Page Styling*/
 
-.z_index {
-  z-index: 1;
-}
 
 
 
@@ -234,19 +180,7 @@ header nav ul li a {
 .buyer-tile:nth-child(3n+3) {  
   margin: 0 0 15px 0;
 }
-/*SHOW SELLER/BUYER*/
-/*#show {
-  border: 3px solid blue;
-  display: none;
-  width: 290px;
-  height: 100vh;
-  overflow: scroll;
-  position: absolute;
-  z-index: 2;
-  right: 0;
-  top: 70px;
 
-}*/
 #showAndTickets {
   /*border: 3px solid black;*/
   display: none;
@@ -265,9 +199,8 @@ header nav ul li a {
   padding: 10px;
   margin-bottom: 15px;
 }
-#login-seller, #login-buyer {
-  display: none;
-}
+
+
 /*BUTTON STYLING*/
 .btn {
   text-align: center;
@@ -289,6 +222,107 @@ header nav ul li a {
   background: #3cb0fd;
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
+}
+
+
+
+
+
+/*//////////////      RESPONSIVE MENU   //////////////////*/
+
+
+
+
+a{
+  color: #191919;
+  text-decoration: none;
+}
+ul{
+  list-style: none;
+}
+.nav{
+  background: #ffffff;
+  min-height: 50px;
+}
+
+.nav .right{
+  float: right;
+  margin-right: 1em;
+}
+.nav .right li{
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 14px;
+  float: left;
+}
+.nav .right li a{
+  display: block;
+  padding: 9px 15px;
+  line-height: 30px;
+}
+.nav .right li a:hover{
+  background: #f2f2f2;
+}
+
+.toggle-nav{
+  display: none;
+}
+
+.nav-mobile style{
+  display: block;
+}
+
+
+@media only screen and (max-width: 640px){
+  .nav{
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .toggle-nav{
+    display: block;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    line-height: 30px;
+  }
+  .toggle-nav:after{
+    content: ' Menu';
+  }
+
+  .nav-mobile{
+    display: none;
+  }
+
+  .style-mobile{
+    background: #ffffff;
+    top : 51px;
+    position : absolute;
+    width : 100%;
+  }
+
+  .style-mobile li{
+    display: block;
+    width: 100%;
+  }
+
+  .nav .right{
+    display: block;
+    float: none;
+    margin: 0em;
+  }
+
+  .nav .left{
+    display: block;
+    float: none;
+    margin: 0em;
+  }
+
+
+}
+
+@media only screen and (min-width: 641px){
+  .nav-mobile {
+    display:block !important;
+  }
 }
 
  

@@ -51,60 +51,42 @@ function getSellers(){
 }
 
 
+
 //INDEX - SELLERS
 function toggleShowSellers(){
-
-        // toggleAll();
-        // $('#sellers').toggle("slow");
-  
-  $("#show").slideUp("slow");
-  $("#tickets").slideUp("slow");
-  $("#buyers").slideUp("slow");
-
-  setTimeout(function(){
-    $("#show").html(" ");
-    $("#tickets").html(" ");
-    $('#sellers').toggle("slow")
-  }, 600);
-}
-
-// function toggleAll(){
-//   console.log("toggled all")
-//   $("#show").slideUp("slow");
-//   $("#tickets").slideUp("slow");
-//   $("#showAndTickets").slideUp("slow");
-//   $("#dropDownTop").slideUp("slow");
-//   $("#buyers").slideUp("slow");
-//   $("#sellers").slideUp("slow");
-//   $("#form#new-buyer").slideUp("slow");
-//   $("#form#edit-buyer").slideUp("slow");
-//   $("#form#new-seller").slideUp("slow");
-//   $("#form#edit-seller").slideUp("slow");
-//   $("#form#login-buyer").hide();
-//   $("#form#login-seller").hide();
-//   $("#frontInfoHolder").slideUp("slow");
-//   $("#ticketIndex").slideUp("slow");
-// };
+        $('#sellers').toggle("slow");
+        $("#show").slideUp("slow");
+  }
 
 
 
 
 // login seller form
 function toggleSellerLoginForm() {
-  $('#login-seller').toggle("slow")
+  $( ".showable" ).hide();
+
+  setTimeout(function() {
+    $("form#login-seller").toggle("slow");
+  }, 500);
+
 }
 
 
 // CREATE SELLER
 
 function toggleSellerForm(){
-  $("form#new-seller").slideToggle("slow");
-  $("form#new-buyer").slideUp("slow");
+  $( ".showable" ).hide();
+
+  setTimeout(function() {
+    $("form#new-seller").toggle("slow");
+  }, 500);
 
 }
 
 function createSeller(){
   event.preventDefault();
+  
+  console.log("You are creating a seller")
 
   $.ajax({
     url:'/seller-register',
@@ -114,8 +96,6 @@ function createSeller(){
       "lastName": $("input#lastname").val(),
       "userName": $("input#username").val(),
       "email": $("input#email").val(),
-      "latitude": $("input#latitude").val(),
-      "longitude": $("input#longitude").val(),
       "phone": $("input#phone").val(),
       "location": $("input#location").val(),
       "password": $("input#password").val(),
@@ -123,17 +103,47 @@ function createSeller(){
     }}
 
   }).done(function(data) {
-    addSeller(data.seller);
+    // addSeller(data.seller);
     toggleSellerForm();
+    console.log("Hey it's done");
     console.log(data);
-    $("input#firstname").val(null),
-    $("input#lastname").val(null),
-    $("input#username").val(null),
-    $("input#email").val(null),
-    $("input#latitude").val(null),
-    $("input#longitude").val(null),
-    $("input#phone").val(null)
+    var pass = $("input#password").val();
+    var eme  = $("input#email").val();
+
+    // THIS IS THEN GOING TO LOG IN THE SELLER
+
+    $.ajax({
+      url: '/seller-login',
+      type: 'post',
+      data: { seller : {
+        "email": eme,
+        "password": pass
+      }}
+    }).done(function(data){
+      $("input#firstname").val(null),
+      $("input#lastname").val(null),
+      $("input#username").val(null),
+      $("input#email").val(null),
+      $("input#phone").val(null)
+      console.log(data);
+    
+          window.localStorage.setItem('sellerToken' , data.sellerToken);
+          console.log("logged in")
+
+          $.ajaxSetup({
+            headers: {'Authorisation': 'Bearer ' + data.sellerToken }
+          });
+          // $('#sellerRegisterModal').remodal().destroy();
+          location.reload();
+
+        })
+  
+
   });
+
+  
+
+  // location.reload(true);
 }
 
 // ADD A SELLER TO PAGE

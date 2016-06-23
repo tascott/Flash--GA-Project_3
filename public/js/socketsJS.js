@@ -8,8 +8,7 @@ if (!!currentSeller() || !!currentBuyer()) {
   var hideMe = currentSeller().buyer || currentBuyer().buyer;
   
   hideMe = !!!hideMe
-  
-  console.log('you are user ' + currentSeller().username);
+
 
   loadTheMap();
 
