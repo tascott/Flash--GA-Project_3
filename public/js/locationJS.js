@@ -12,17 +12,46 @@ var markers = [];
 // }
 
 
-function addMarker(location) {
-  var marker = new google.maps.Marker({
-    position: location,
-    map: map
-  });
-  markers.push(marker);
+function loadTheMap(){
 
-  marker.addListener('click', function() {
-       infowindow.open(map, marker);
-       console.log("infowindow clicked")
-        });
+  // This makes the map active
+  navigator.geolocation.getCurrentPosition(function(location){
+    var latitude = location.coords.latitude;
+    var longitude = location.coords.longitude;
+    var latLng = new google.maps.LatLng(latitude, longitude);
+
+    showMap(latLng);
+
+  });
+}
+
+function addMarker(location , id) {
+
+  if(markers[id]) {
+
+    var marker = markers[id];
+    marker.setPosition(location);
+    console.log('existing marker' , id);
+
+  } else {
+
+    console.log('new marker' , id);
+
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map,
+    });
+
+    marker.addListener('click', function() {
+         infowindow.open(map, marker);
+         console.log("infowindow clicked")
+          });
+
+    markers[id]=marker;
+  }
+
+
+  
 }
 
 // Sets the map on all markers in the array.

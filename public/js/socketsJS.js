@@ -1,39 +1,21 @@
 $(document).ready(function(){
 
 
-
-
-
-
-
-console.log(!!currentSeller())
-// var id = currentSeller()._id;
-// console.log('you are user ' + currentSeller()._id);
 if (!!currentSeller() || !!currentBuyer()) {
   var socket = io();
+  
   var id = currentSeller()._id || currentBuyer()._id;
   var hideMe = currentSeller().buyer || currentBuyer().buyer;
+  
   hideMe = !!!hideMe
+  
   console.log('you are user ' + currentSeller().username);
-  // socket.emit('new seller' , id);
 
-
-  navigator.geolocation.getCurrentPosition(function(location){
-
-    console.log("THIS IS GET ME LAT: " + location.coords.latitude);
-    console.log("THIS IS GET ME LON: " + location.coords.longitude);
-
-    var latitude = location.coords.latitude;
-    var longitude = location.coords.longitude;
-
-    var latLng = new google.maps.LatLng(latitude, longitude);
-
-    showMap(latLng);
-
-  });
+  loadTheMap();
 
   // Creates markers - for now....
   setInterval( function(){
+  
     navigator.geolocation.getCurrentPosition(function(location){
     socket.emit('update location' , {
       id : id, 
@@ -46,7 +28,6 @@ if (!!currentSeller() || !!currentBuyer()) {
 } , 3000);
 
 
-
 socket.on('location updated' , function(user){
  
   var latLng = new google.maps.LatLng(user.latitude, user.longitude);
@@ -57,11 +38,12 @@ socket.on('location updated' , function(user){
     content: contentString
   });
 
- deleteMarkers();
- addMarker(latLng);
- setMapOnAll(map);
+ 
+ addMarker(latLng , user.id);
+ //setMapOnAll(map);
 
-  console.log(markers);
+
+  // console.log(markers);
 
     });
 
