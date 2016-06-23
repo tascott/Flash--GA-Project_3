@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 
 function toggleAll(){
-  console.log("toggled all")
+  console.log("toggled all");
   $("#show").slideUp("slow");
   $("#tickets").slideUp("slow");
   $("#showAndTickets").slideUp("slow");
@@ -35,11 +35,6 @@ function toggleAll(){
   $("#ticketIndex").slideUp("slow");
 };
 
-
-
-
- 
-  
 
 
 function checkForSellerLogin(){

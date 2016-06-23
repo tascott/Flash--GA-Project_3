@@ -43,6 +43,8 @@ function currentBuyer() {
     payload = window.atob(payload);
     payload = JSON.parse(payload);
     return payload
+  } else {
+    return false;
   }
 }
 

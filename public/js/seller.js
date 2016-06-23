@@ -35,6 +35,8 @@ function currentSeller() {
     payload = window.atob(payload);
     payload = JSON.parse(payload);
     return payload
+  } else {
+    return false;
   }
 }
 
@@ -52,18 +54,18 @@ function getSellers(){
 //INDEX - SELLERS
 function toggleShowSellers(){
 
-        toggleAll();
-        $('#sellers').toggle("slow");
+        // toggleAll();
+        // $('#sellers').toggle("slow");
   
-  // $("#show").slideUp("slow");
-  // $("#tickets").slideUp("slow");
-  // $("#buyers").slideUp("slow");
+  $("#show").slideUp("slow");
+  $("#tickets").slideUp("slow");
+  $("#buyers").slideUp("slow");
 
-  // setTimeout(function(){
-  //   $("#show").html(" ");
-  //   $("#tickets").html(" ");
-  //   $('#sellers').toggle("slow")
-  // }, 600);
+  setTimeout(function(){
+    $("#show").html(" ");
+    $("#tickets").html(" ");
+    $('#sellers').toggle("slow")
+  }, 600);
 }
 
 // function toggleAll(){

@@ -48,27 +48,25 @@ app.use(routes);
 io.on('connection', function(socket){
   console.log('a user connected');
 
-
   // io.emit('new user', 'new user connection');
-
-
-
-
-
-
-
   socket.on('update location' , function(user) {
     //the user is an abject from socket.emit.updatelocation
     //sending info back
+    console.log("This should be hidden: " + user.display)
+
+  if(!!user.display){
     socket.broadcast.emit('location updated' , user);
     console.log(user);
     console.log('location updated');
+  }
 
   });
 
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
+
+
 });
 
 

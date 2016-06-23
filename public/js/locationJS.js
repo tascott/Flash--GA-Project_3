@@ -12,6 +12,10 @@ function getMyLocation() {
 }
 
 
+function clearMarkers() {
+  setMapOnAll(null);
+}
+
 
 function displayLocation(position) {
 
@@ -20,8 +24,10 @@ function displayLocation(position) {
 
   var latLng = new google.maps.LatLng(latitude, longitude);
 
-  showMap(latLng);
-  createMarker(latLng);
+  return latLng;
+
+  // showMap(latLng);
+  // createMarker(latLng);
   // getSellerLocations();
 
 
