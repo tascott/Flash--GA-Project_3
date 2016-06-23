@@ -18,6 +18,8 @@ $("#seller-index-button" ).on("click", toggleShowSellers);
 $("body").on("click", ".delete", removeSeller);
 $('body').on('click', '.show', showSellerProfileMike) 
 $('body').on('click', '.edit', editSeller);
+$('body').on('click', '.sellerClose', hideSellerProfileMike);
+
 
 
 });
@@ -153,33 +155,13 @@ function addSeller(seller){
   $("#sellers").prepend("<div class='seller-tile'><h2>" + seller.firstName + "</h2><p> " + seller.phone + "</p><a data-id='"+seller._id+"' class='delete' href='#'>Delete</a><a data-id='"+seller._id+"' class='show' href='#'>Show</a><a href='#' class='edit' data-id='"+seller._id+"'>Edit</a></div>");
 }
 
+// hide profile
 
-// SHOW SELLER
-
-function showSellerProfile(){
-  $('#sellers').slideUp();
-  $.ajax({
-    method: 'GET',
-    url: '/sellers/'+$(this).data().id
-  }).done(function(seller){
-    $('#show').prepend("<div class='seller-tile' data-id="+ seller._id +
-      "><h2 id='username'>" +
-        seller.lastName + "</h2><p> " 
-        + seller.userName + "</p><a href='https://github.com/"+ 
-        seller.phone +"'>Phone</a> | <a href='"
-         +
-        "'>Phone</a></div>");
-    $.each(seller.tickets, function(index, ticket){
-      addTicketMike(ticket)
-    })
-    $("#tickets").append("<div class='ticket-tile'><h2><a id='addTicket' href='#'>Add a ticket +</a></h2></div>")
-    setTimeout(function(){
-      $('#show').slideDown()
-      $('#tickets').slideDown()
-    }, 600);
-  });
+function hideSellerProfileMike(){
+  $('#showAndTickets').toggle();
+  $(this).parent().remove();
+  $('#tickets').empty();
 }
-
 
 // SHOW SELLER - MIKE
 
@@ -190,13 +172,9 @@ function showSellerProfileMike(){
     method: 'GET',
     url: '/sellers/'+$(this).data().id
   }).done(function(seller){
-    $('#show').prepend("<div class='seller-tile' data-id="+ seller._id +
-      "><h2 id='username'>" +
-        seller.lastName + "</h2><p> " 
-        + seller.userName + "</p><a href='https://github.com/"+ 
-        seller.phone +"'>Phone</a> | <a href='"
-         +
-        "'>Phone</a></div>");
+    $('#show').prepend("<div class='seller-tile' data-id="+ seller._id +"> <h2 id='username'> User: " + seller.userName + "</h2><h3> Name:  " 
+                + seller.firstName +" "+ seller.lastName+ "</h3><h3> Email: "+seller.email+"</h3><h3>Number: "+seller.phone+"</h3></h3><a href='#' class='sellerClose' data-id='"+seller._id+"'>[Close X]</a></div>");
+
     $.each(seller.tickets, function(index, ticket){
       // If I'm a seller I want to see the buyers tickets
       if(currentBuyer()){
