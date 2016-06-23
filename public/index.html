@@ -6,6 +6,8 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./css/reset.css">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="stylesheet" type="text/css" href="./css/remodal.css">
+  <link rel="stylesheet" type="text/css" href="./css/remodal-default-theme.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
@@ -16,141 +18,222 @@
   <script type="text/javascript" src="./js/ticket.js"></script>
   <script type="text/javascript" src="./js/locationJS.js"></script>
   <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="./js/remodal.js"></script>
   <script type="text/javascript" src="./js/socketsJS.js"></script>
   <!-- <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> -->
-  <style>
 
-
-  </style>
-    
 </head>
 <body>
+  <div class="remodal-bg">
+    <header>
+      <nav class="nav">
+        <a class="toggle-nav" href="#">&#9776;</a>
+        <div class="nav-mobile">
+          <ul id="menuBar" class="right">
+            <li>&#161FLASH!</li>
+            <li><img id="miniLogo" src="https://www.emojimeanings.org/images/emojis/297.png"></li>
+            <li><a id="seller-form-button" href="#">Add Seller</a></li>
+            <li><a id="buyer-form-button" href="#">Add Buyer</a></li>
 
-<header>
-  <nav>
-    <ul id="menuBar">
-      <li>&#161FLASH!</li>
-      <li><a id="seller-form-button" href="#">Add Seller</a></li>
-      <li><a id="buyer-form-button" href="#">Add Buyer</a></li>
-
-      <li><a id="seller-index-button" href="#">All Sellers</a></li>
-      <li><a id="buyer-index-button" href="#">All Buyers</a></li>
-      <li><a id="seller-login-button" href="#">Login Seller</a></li>
-      <li><a id="buyer-login-button" href="#">Login Buyer</a></li>
-      <li><a id="ticket-index-button" href="#">All Tickets</a></li>
-      <li><a id="logout-button" href="#">Logout</a></li>
-    </ul>
-  </nav>
-</header> 
-
-<main>
-
-
-
-<form id="new-seller">
-  <input type="text" name='firstName' id="firstname" placeholder="First Name">
-  <input type="text" name='lastname' id="lastname" placeholder="Last Name">
-  <input type="text" name='username' id="username" placeholder="Username">
-  <input type="text" name='email' id="email" placeholder="Email">
-  <input type="text" name='latitude' id="latitude" placeholder="Latitude">
-  <input type="text" name='longitude' id="longitude" placeholder="Longitude">
-  <input type="number" name='phone' id="phone" placeholder="Phone">
-  <input type="password" name='password' id="password" placeholder="Password">
-  <input type="password" name='passwordconfirmation' id="passwordconfirmation" placeholder="Confirm Password">
-  <input type="submit" value='Save' id="submit">
-</form>
-
-
-<form id="edit-seller" >
-  <input type="text" name='edit-firstName' id="edit-firstName">
-  <input type="text" name='edit-lastName' id="edit-lastName">
-  <input type="text" name='edit-userName' id="edit-userName">
-  <input type="text" name='edit-phone' id="edit-phone">
-  <input type="submit" value='Save' id="submit">
-</form>
-
-
-<form id="login-seller" >
-  <input type="text" name='login-seller-userName' placeholder="Email" id="login-seller-userName">
-  <input type="password" name='login-seller-password' id="login-seller-password">
-  <input type="submit" value='Login' id="submit">
-</form>
+            <li><a id="seller-index-button" href="#">All Sellers</a></li>
+            <li><a id="buyer-index-button" href="#">All Buyers</a></li>
+            <li><a id="seller-login-button" href="#">Login Seller</a></li>
+            <li><a id="buyer-login-button" href="#">Login Buyer</a></li>
+            <li><a id="ticket-index-button" href="#">All Tickets</a></li>
+            <li><a id="logout-button" href="#">Logout</a></li>
+            <li><img id="miniLogo" src="https://www.emojimeanings.org/images/emojis/297.png"></li>
+          </ul>
+        </div>
+      </nav>
+    </header> 
 
 
 
-<form id="new-buyer">
-  <input type="text" name='firstname' id="buyerfirstname" placeholder="First Name">
-  <input type="text" name='lastname' id="buyerlastname" placeholder="Last Name">
-  <input type="text" name='username' id="buyerusername" placeholder="Username">
-  <input type="text" name='email' id="buyeremail" placeholder="Email">
-  <input type="number" name='buyerphone' id="buyerphone" placeholder="Phone">
-  <input type="password" name='buyerpassword' id="buyerpassword" placeholder="Password">
-  <input type="password" name='buyerpasswordconfirmation' id="buyerpasswordconfirmation" placeholder="Confirm Password">
-  <input type="submit" value='Save' id="submit">
-</form>
-
-
-<form id="edit-buyer" >
-  <input type="text" name='edit-firstName' id="edit-firstName">
-  <input type="text" name='edit-lastName' id="edit-lastName">
-  <input type="text" name='edit-userName' id="edit-bio">
-  <input type="text" name='edit-phone' id="edit-phone">
-  <input type="submit" value='Save' id="submit">
-</form>
-
-<form id="login-buyer" >
-  <input type="text" name='login-buyer-userName' placeholder="Email" id="login-buyer-userName">
-  <input type="password" name='login-buyer-password' id="login-buyer-password">
-  <input type="submit" value='Login' id="submit">
-</form>
+    <main>
 
 
 
 
-<form id="new-ticket" >
-  <input type="text" name='event' id="event" placeholder="Event">
-  <input type="text" name='date' id="date" placeholder="Date">
-  <input type="text" name='price' id="price" placeholder="Price">
-  <input type="submit" value='Save' id="submit">
-</form>
+      <form id="edit-seller" class="showable" >
+        <input type="text" name='edit-firstName' id="edit-firstName">
+        <input type="text" name='edit-lastName' id="edit-lastName">
+        <input type="text" name='edit-userName' id="edit-userName">
+        <input type="text" name='edit-phone' id="edit-phone">
+        <input type="submit" value='Save' id="submit">
+      </form>
 
 
-<div id="frontBody">
+      <form id="edit-buyer" class="showable" >
+        <input type="text" name='edit-firstName' id="edit-firstName">
+        <input type="text" name='edit-lastName' id="edit-lastName">
+        <input type="text" name='edit-userName' id="edit-bio">
+        <input type="text" name='edit-phone' id="edit-phone">
+        <input type="submit" value='Save' id="submit">
+      </form>
 
-  <div id="dropDownTop">
-    <div id="sellers">
+
+
+
+      <form id="new-ticket" class="showable" >
+        <input type="text" name='event' id="event" placeholder="Event">
+        <input type="text" name='date' id="date" placeholder="Date">
+        <input type="text" name='price' id="price" placeholder="Price">
+        <input type="submit" value='Save' id="submit">
+      </form>
+
+
+      <div id="frontBody">
+
+        <div id="dropDownTop" class="showable" >
+          <div id="sellers">
+          </div>
+          <div id="buyers">
+          </div>
+
+          <div id="showAndTickets" class="showable" >
+            <div id="show" class="showable" >
+            </div>
+            <div id="tickets" class="showable" > 
+            </div>
+          </div>
+        </div><!-- dropdowntop -->
+
+        <div id="map-canvas">
+        </div>
+        <div id="ticketIndex" class="showable" >
+        </div>
+      </div><!-- frontBody -->
+
+
+
+<!-- Modals -->
+
+<!-- <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+<button data-remodal-action="confirm" class="remodal-confirm">OK</button> -->
+
+<!-- Modals -->
+
+      <div class="welcome">
+        <button data-remodal-action="close" class="remodal-close"></button>
+        <h1>&#161FLASH!</h1>
+        
+        <div id="logoModal">
+          
+            <img src="https://www.emojimeanings.org/images/emojis/297.png">
+            <h1>Buy and sell last minute <br> tickets to sought-after events</h1>
+          <!-- <button id="seeTicketsButton" class="btn">See Tickets</button></br>
+          <button class="btn">Sign Up</button> -->
+      </div>
+
+      <div id="buyerModal">
+        <a id="buyerModalButton" href="#mainBuyerModal"><h1>BUYERS</h1></a>
+      </div>
+
+      <div id="sellerModal">
+        <a href="#mainSellerModal"><h1>SELLERS</h1></a>
+      </div>
+
+      <div id="ticketsModal">
+      <button id="seeTicketsButton" class="btn">See All Tickets</button>
+      </div>
+
+<!-- Buyer Login Modals -->
+
+
+    <div class="remodal" data-remodal-id="mainBuyerModal">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <h1>Login</h1>
+
+     <form id="login-buyer" class="showable" >
+       <input type="text" name='login-buyer-userName' placeholder="Email" id="login-buyer-userName">
+       <input type="password" name='login-buyer-password' id="login-buyer-password">
+       <input type="submit" value='Login' id="submit">
+     </form>
+     <a href="#buyerRegisterModal">Register?</a>
     </div>
-    <div id="buyers">
+
+
+    <!-- Buyer Register Modals -->
+
+    <div class="remodal" data-remodal-id="buyerRegisterModal">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <h1>New User</h1>
+
+      <form id="new-buyer" class="showable" >
+       <input type="text" name='firstname' id="buyerfirstname" placeholder="First Name">
+       <input type="text" name='lastname' id="buyerlastname" placeholder="Last Name">
+       <input type="text" name='username' id="buyerusername" placeholder="Username">
+       <input type="text" name='email' id="buyeremail" placeholder="Email">
+       <input type="number" name='buyerphone' id="buyerphone" placeholder="Phone">
+       <input type="password" name='buyerpassword' id="buyerpassword" placeholder="Password">
+       <input type="password" name='buyerpasswordconfirmation' id="buyerpasswordconfirmation" placeholder="Confirm Password">
+       <input type="submit" value='Save' id="submit">
+     </form>
+
     </div>
 
-  <div id="showAndTickets">
-    <div id="show">
+
+<!-- Seller Login Modals -->
+
+
+    <div class="remodal" data-remodal-id="mainSellerModal">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <h1>Login</h1>
+
+     <form id="login-seller" class="showable" >
+       <input type="text" name='login-seller-userName' placeholder="Email" id="login-seller-userName">
+       <input type="password" name='login-seller-password' id="login-seller-password">
+       <input type="submit" value='Login' id="submit">
+     </form>
+
+     <a href="#sellerRegisterModal">Register?</a>
     </div>
-    <div id="tickets"> 
-    </div>
-  </div>
-  </div><!-- dropdowntop -->
-
-  <div id="frontInfoHolder">
-    <img src="http://emojipop.net/data/images/emoji_set_297.png">
-    <h1>Buy and sell last minute <br> tickets to sought-after events</h1>
-    <button id="seeTicketsButton" class="btn">See Tickets</button></br>
-    <button class="btn">Sign Up</button>
-  </div>
-
-  <div id="map-canvas">
-  </div>
-  <div id="ticketIndex">
-  </div>
-</div><!-- frontBody -->
 
 
 
-<script async defer
-     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_BECvBlfI-E7bfu7fcXcnAOowGWnQyyc&libraries=places">
+
+<!-- Seller Register Modals -->
+
+
+
+<div class="remodal" data-remodal-id="sellerRegisterModal">
+  <button data-remodal-action="close" class="remodal-close"></button>
+  <h1>New Seller</h1>
+
+  <form id="new-seller" class="showable" >
+    <input type="text" name='firstName' id="firstname" placeholder="First Name">
+    <input type="text" name='lastname' id="lastname" placeholder="Last Name">
+    <input type="text" name='username' id="username" placeholder="Username">
+    <input type="text" name='email' id="email" placeholder="Email">
+    <input type="number" name='phone' id="phone" placeholder="Phone">
+    <input type="password" name='password' id="password" placeholder="Password">
+    <input type="password" name='passwordconfirmation' id="passwordconfirmation" placeholder="Confirm Password">
+    <input type="submit" value='Save' id="submit">
+  </form>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+  </main>
+
+
+
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_BECvBlfI-E7bfu7fcXcnAOowGWnQyyc&libraries=places">
 </script>
 
 
 
+
+
+</div>
 </body>
 </html>
