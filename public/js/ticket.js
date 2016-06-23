@@ -34,17 +34,15 @@ function getTickets(){
 
 //INDEX - Tickets
 function toggleShowTickets(){
-  $("#show").slideUp("slow");
-  $("#sellers").slideUp("slow");
-  $("#buyers").slideUp("slow");
-  $("#ticketIndex").toggle("slow");
+
+  $( ".showable" ).hide();
+
+
   $("#frontInfoHolder").slideUp("slow");
 
-
-  setTimeout(function(){
-    $("#show").html(" ");
-    $("#buyers").html(" ");
-  }, 600);
+  setTimeout(function() {
+    $("#ticketIndex").toggle("slow");
+  }, 500);
 }
 
 

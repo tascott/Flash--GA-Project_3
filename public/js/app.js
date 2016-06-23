@@ -1,39 +1,43 @@
 $(document).ready(function(){
 
+
+
+  if (!currentSeller() && !currentBuyer()) {
+    console.log("open")
+   $('.welcome').remodal().open();
+ 
+ } else {
+    $('.welcome').remodal().destroy();
+    console.log("destroy")
+ };
+
+
+  // Returns width of browser viewport
+  var browser = $(window).width();
+  // Returns width of HTML document
+  var document = $(document).width();
+
+  $('.nav .toggle-nav').click(function(e){
+      $('.nav .nav-mobile').addClass('style-mobile').slideToggle('slow');
+      e.preventDefault();
+  });
+
+
   $("#logout-button" ).on("click", logout);
-  // $("#mainBanner" ).on("click", hideBanner);
   
-
-  function hideBanner(){
-    $("#mainBanner").toggle();
-    console.log("banner hidden");
-    $( "#mainBanner" ).addClass("z_index")
-
-
-
-  }
-
-
 });
 
+function clearAll() {
 
-function toggleAll(){
-  console.log("toggled all");
-  $("#show").slideUp("slow");
-  $("#tickets").slideUp("slow");
-  $("#showAndTickets").slideUp("slow");
-  $("#dropDownTop").slideUp("slow");
-  $("#buyers").slideUp("slow");
-  $("#sellers").slideUp("slow");
-  $("#form#new-buyer").slideUp("slow");
-  $("#form#edit-buyer").slideUp("slow");
-  $("#form#new-seller").slideUp("slow");
-  $("#form#edit-seller").slideUp("slow");
-  $("#form#login-buyer").slideUp("slow");
-  $("#form#login-seller").slideUp("slow");
-  $("#frontInfoHolder").slideUp("slow");
-  $("#ticketIndex").slideUp("slow");
-};
+
+
+  $( ".showable" ).hide();
+  setTimeout(function() {
+    $(this).show();
+  }, 500);
+
+}
+
 
 
 
@@ -102,7 +106,7 @@ function logSellerIn(){
           headers: {'Authorisation': 'Bearer ' + data.sellerToken }
         });
       })
-  $
+  location.reload(true);
 
 
 }
@@ -123,8 +127,6 @@ function logBuyerIn(){
     console.log(data);
     console.log(data.message);
 
-        // body...
-
         window.localStorage.setItem('buyerToken' , data.buyerToken);
         console.log("Buyer is logged in NOW")
 
@@ -132,7 +134,7 @@ function logBuyerIn(){
           headers: {'Authorisation': 'Bearer ' + data.buyerToken }
         });
       })
-
+  location.reload(true);
 }
 
 
@@ -143,6 +145,7 @@ function logout() {
   window.localStorage.removeItem('sellerToken');
   window.localStorage.removeItem('buyerToken');
   console.log("Logout");
+  location.reload(true);
   
 
 }

@@ -29,7 +29,11 @@ if(checkForSellerLogin()){
   });
 
 function toggleBuyerLoginForm() {
- $("form#login-buyer").toggle("slow");
+  $(".showable").hide();
+  setTimeout(function() {
+    $("form#login-buyer").toggle("slow");
+  }, 500);
+
 }
 
 function getBuyerToken() {
@@ -64,26 +68,37 @@ function currentBuyer() {
 
   //INDEX - BUYERS
   function toggleShowBuyers(){
-    $("#show").slideUp("slow");
-    $("#tickets").slideUp("slow");
-    $("#sellers").slideUp("slow");
-    setTimeout(function(){
-      $("#show").html(" ");
-      $("#tickets").html(" ");
-      $('#buyers').toggle("slow")
-    }, 600);
+    // $("#show").slideUp("slow");
+    // $("#tickets").slideUp("slow");
+    // $("#sellers").slideUp("slow");
+    // setTimeout(function(){
+    //   $("#show").html(" ");
+    //   $("#tickets").html(" ");
+    //   $('#buyers').toggle("slow")
+    // }, 600);
+
+    $( ".showable" ).hide();
+
+    setTimeout(function() {
+      $("#buyers").toggle("slow");
+    }, 500);
   }
 
 
   // CREATE BUYER
 
   function toggleBuyerForm(){
-    $("form#new-buyer").slideToggle("slow");
-    $("form#new-seller").slideUp("slow");
+    $( ".showable" ).hide();
+
+    setTimeout(function() {
+      $("form#new-buyer").toggle("slow");
+    }, 500);
   }
 
   function createBuyer(){
     event.preventDefault();
+
+    console.log("You are creating a buyer");
 
     $.ajax({
       url:'/buyer-register',
@@ -99,17 +114,42 @@ function currentBuyer() {
       }}
 
     }).done(function(data) {
-      addBuyer(data.buyer);
-      console.log(data);
+      // addBuyer(data.buyer);
       toggleBuyerForm();
-      $("input#buyerfirstname").val(null),
-      $("input#buyerlastname").val(null),
-      $("input#buyerusername").val(null),
-      $("input#buyeremail").val(null),
-      $("input#buyerphone").val(null),
-      $("input#buyerpassword").val(null),
-      $("input#buyerpasswordconfirmation").val(null)
+      console.log("Hey it's done");
+      console.log(data);
+      var pass = $("input#buyerpassword").val();
+      var eme  = $("input#buyeremail").val();
+
+      // This is going to log the buyen
+      
+            $.ajax({
+              url: '/buyer-login',
+              type: 'post',
+              data: { buyer : {
+                "email": eme,
+                "password": pass
+              }}
+            }).done(function(data){
+              $("input#firstname").val(null),
+              $("input#lastname").val(null),
+              $("input#username").val(null),
+              $("input#email").val(null),
+              $("input#phone").val(null)
+              console.log(data);
+
+                  window.localStorage.setItem('buyerToken' , data.buyerToken);
+                  console.log("Buyer is logged in NOW")
+
+                  $.ajaxSetup({
+                    headers: {'Authorisation': 'Bearer ' + data.buyerToken }
+                  });
+                  location.reload();
+
+                })
+
     });
+
   }
 
   // ADD A BUYER TO PAGE
