@@ -74,7 +74,7 @@ function addTicket2(ticket){
       } 
       }
     }).done(function(ticket) {
-      addTicket(ticket)
+      addTicketForBuyer(ticket)
       toggleAddTicket();
       $("input#event").val(null),
       $("input#date").val(null),

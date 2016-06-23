@@ -25,6 +25,7 @@ if(checkForSellerLogin()){
   $("body").on("click", ".buyerdelete", removeBuyer);
   $('body').on('click', '.buyershow', showBuyerProfileMike)
   $('body').on('click', '.buyeredit', editBuyer);
+  $('body').on('click', '.buyerClose', hideBuyerProfileMike);
 
   });
 
@@ -158,31 +159,11 @@ function currentBuyer() {
     $("#buyers").prepend("<div class='buyer-tile'><h2>" + buyer.firstName + "</h2><p> " + buyer.phone + "</p><a data-id='"+buyer._id+"' class='buyerdelete' href='#'>Delete</a><a data-id='"+buyer._id+"' class='buyershow' href='#'>Show</a><a href='#' class='buyeredit' data-id='"+buyer._id+"'>Edit</a></div>");
   }
 
-  // SHOW BUYERS
+  function hideBuyerProfileMike(){
+    $('#showAndTickets').toggle();
+    $(this).parent().remove();
+    $('#tickets').empty();
 
-  function showBuyerProfile(){
-    $('#buyers').slideUp();
-    console.log("You clicked a buyer profile: " + $(this).data().id)
-    $.ajax({
-      method: 'GET',
-      url: '/buyers/'+$(this).data().id
-    }).done(function(buyer){
-      $('#show').prepend("<div class='buyer-tile' data-id="+ buyer._id +
-        "><h2 id='username'>" +
-        buyer.lastName + "</h2><p> " 
-        + buyer.userName + "</p><a href='https://github.com/"+ 
-        buyer.phone +"'>Phone</a> | <a href='"
-        +
-        "'>Phone</a></div>");
-      $.each(buyer.tickets, function(index, ticket){
-        addTicket(ticket)
-      })
-      $("#tickets").append("<div class='ticket-tile'><h2><a id='addTicket' href='#'>Add a ticket +</a></h2></div>")
-      setTimeout(function(){
-        $('#show').slideDown()
-        $('#tickets').slideDown()
-      }, 600);
-    });
   }
 
   // SHOW BUYERS
@@ -194,13 +175,11 @@ function currentBuyer() {
         method: 'GET',
         url: '/buyers/'+$(this).data().id
       }).done(function(buyer){
-        $('#show').prepend("<div class='seller-tile' data-id="+ buyer._id +
-          "><h2 id='username'>" +
-            buyer.lastName + "</h2><p> " 
-            + buyer.userName + "</p><a href='https://github.com/"+ 
-            buyer.phone +"'>Phone</a> | <a href='"
-             +
-            "'>Phone</a></div>");
+        $('#show').prepend("<div class='seller-tile' data-id="+ buyer._id +"> <h2 id='username'> User: " + buyer.userName + "</h2><h3> Name:  " 
+            + buyer.firstName +" "+ buyer.lastName+ "</h3><h3> Email: "+buyer.email+"</h3><h3>Number: "+buyer.phone+"</h3><a href='#' class='buyerClose' data-id='"+buyer._id+"'>[Close X]</a></div>");
+
+        // Fix later...
+        // <a href='#' class='buyeredit' data-id='"+buyer._id+"'>Edit</a></div>"
         $.each(buyer.tickets, function(index, ticket){
           // If I'm a seller I want to see the buyers tickets
           if(currentBuyer()){
@@ -213,7 +192,7 @@ function currentBuyer() {
 
           }
         })
-        $("#tickets").append("<div class='ticket-tile'><h2><a id='addTicket' href='#'>Add a ticket +</a></h2></div>")
+
         setTimeout(function(){
           $('#show').slideDown()
           $('#tickets').slideDown()
@@ -221,31 +200,31 @@ function currentBuyer() {
       });
   }
 
-
   // EDIT BUYER
 
   function editBuyer(){
+
     $.ajax({
       method: 'get',
       url: '/buyers/'+$(this).data().id
     }).done(function(buyer){
       $("input#edit-firstName").val(buyer.firstName),
       $("input#edit-lastName").val(buyer.lastName),
-      $("input#edit-email").val(buyer.email),
+      $("input#edit-userName").val(buyer.userName),
       $("input#edit-phone").val(buyer.phone)
       $('form#edit-buyer').slideDown()
     });
-    $('#edit-buyer').on('submit', updateBuyer);
+    $('#edit-buyer').on('submit', updateBuyer.bind(this));
   }
 
   var updateBuyer = function(){
     event.preventDefault();
     var buyer = {
       buyer:{
-        firstName: $("input#edit-firstName").val(),
-        lastName: $("input#edit-lastName").val(),
-        userName: $("input#edit-userName").val(),
-        phone: $("input#edit-phone").val()
+        "firstName": $("input#edit-firstName").val(),
+        "lastName": $("input#edit-lastName").val(),
+        "userName": $("input#edit-userName").val(),
+        "phone": $("input#edit-phone").val()
       }
     };
     $.ajax({
@@ -254,7 +233,8 @@ function currentBuyer() {
       data: buyer
     }).done(function(data){
       // not ideal
-      location.reload();
+      console.log(data)
+      // location.reload();
     });
   }
 
