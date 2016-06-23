@@ -1,7 +1,10 @@
 $(document).ready(function(){
 
-getSellers();
-checkForSellerLogin();
+
+  if(checkForBuyerLogin()){
+    console.log("THERE IS A BUYER LOGGED IN")
+    getSellers();
+  } 
 
 
 $("form#new-seller").on("submit", createSeller);

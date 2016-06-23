@@ -1,6 +1,6 @@
 module.exports = {
 
-'secret' : 'coffeecoffee'
+'secret' : 'soupsoup'
 
 
 }

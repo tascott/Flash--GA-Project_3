@@ -53,6 +53,8 @@ function checkForSellerLogin(){
     $.ajaxSetup({
       headers: {'Authorisation': 'Bearer ' + token }
     });
+    return true;
+
   }
 }
 
@@ -67,6 +69,7 @@ function checkForBuyerLogin(){
     $.ajaxSetup({
         headers: {'Authorisation': 'Bearer ' + token }
     });
+    return true;
   }
 }
 

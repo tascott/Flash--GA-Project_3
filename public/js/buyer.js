@@ -1,7 +1,15 @@
 $(document).ready(function(){
 
+  // NEED TO RETURN TRUE IF LOAGGED IN
+  
+  
+
+if(checkForSellerLogin()){
+  console.log("THERE IS A SELLER LOGIN")
   getBuyers();
-  checkForBuyerLogin();
+} 
+
+  // checkForBuyerLogin();
 
 
 
