@@ -145,7 +145,7 @@ a:hover {
 #ticketIndex {
   display: none;
   width: 290px;
-  height: 100vh;
+  height: calc(100vh - 60px);
   overflow: scroll;
   position: absolute;
   z-index: 2;
