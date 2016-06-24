@@ -156,6 +156,15 @@ a:hover {
 #ticketIndex .seller-tile {
   border: 1px solid black; 
 }
+
+#seeTicketsButton {
+  margin-bottom: 20px;
+}
+
+#modalTicketIndex {
+  width: 100%;
+  display: none;
+}
 .seller-tile {
   background-color: white;
   width: 290px;
@@ -189,6 +198,8 @@ a:hover {
 .buyer-tile:nth-child(3n+3) {  
   margin: 0 0 15px 0;
 }
+
+
 
 #showAndTickets {
   /*border: 3px solid black;*/

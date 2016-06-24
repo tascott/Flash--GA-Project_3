@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 var ticketSchema = mongoose.Schema({
   event: { type: String, required: true },
-  date: { type: Date, required: true },
+  date: { type: String, required: true },
   price: { type: Number, required: true },
   buyerID : {type: String},
   hold : {type: Boolean},

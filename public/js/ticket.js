@@ -1,13 +1,14 @@
 $(document).ready(function(){
 
   getTickets();
+  getTickets2();
 
   $("form#new-ticket").on("submit", createTicket);
   $("#ticket-index-button").on("click", toggleShowTickets);
   $("#closeTickets").on("click", toggleHideTickets);
 
 
-  $('body').on('click', '#seeTicketsButton', toggleShowTickets)
+  $('body').on('click', '#seeTicketsButton', toggleShowTickets2)
   $('body').on('click', '#addTicket', toggleAddTicket)
   $('body').on('click', '.hold', holdTicket);
   $('body').on('click', '.auth', authTicket);
@@ -25,7 +26,16 @@ function getTickets(){
   var ajax = $.get('/tickets')
   .done(function(data){
     $.each(data, function(index, ticket){
-      addTicket2(ticket);
+      addTicket1(ticket);
+    });
+  });
+}
+
+function getTickets2(){
+  var ajax = $.get('/tickets')
+  .done(function(data){
+    $.each(data, function(index, ticket){
+      addTicket3(ticket);
     });
   });
 }
@@ -33,30 +43,42 @@ function getTickets(){
 
 
 
-
 //INDEX - Tickets
 function toggleShowTickets(){
-
   $( ".showable" ).hide();
-
-
   $("#frontInfoHolder").slideUp("slow");
-
   setTimeout(function() {
     $("#ticketIndex").toggle("slow");
   }, 500);
 }
 
 function toggleHideTickets(){
+  $("#ticketIndex").toggle("slow");
+  $("#modalTicketIndex").toggle("slow");
+}
 
-  $("#ticketIndex").hide();
+
+function toggleShowTickets2(){
+  // $( ".showable" ).hide();
+  setTimeout(function() {
+    $("#modalTicketIndex").toggle("slow");
+  }, 500);
 
 }
 
 
-function addTicket2(ticket){
-  $('#ticketIndex').append("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p><h3> Date: "+ ticket.date + "</h3><h3> Price: "+ticket.price+" </h3><h3>"+isHeld(ticket)+"</h3>")
 
+
+function addTicket1(ticket){
+  $('#ticketIndex').append("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p><h3> Date: "+ ticket.date + "</h3><h3> Price: "+ticket.price+" </h3><h3>"+isHeld(ticket)+"</h3>")
+}
+
+function addTicket2(ticket){
+  $('#modalTicketIndex').append("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p><h3> Date: "+ ticket.date + "</h3><h3> Price: "+ticket.price+" </h3><h3>"+isHeld(ticket)+"</h3>")
+}
+
+function addTicket3(ticket){
+  $('#modalTicketIndex').append("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p><h3> Date: "+ ticket.date + "</h3><h3> Price: "+ticket.price+" </h3><h3><a id='buyerModalButton' href='#mainBuyerModal'>Log in to get Ticket!</h3></a>")
 }
 
 
@@ -141,6 +163,10 @@ function addTicket2(ticket){
     var ticket = $(this).data().ticketid;
     var id = currentSeller()._id;
 
+    $(this).parent().parent().remove();
+
+
+
     console.log("TICKET ID: "+ ticket);
     console.log("SELLER ID: "+ id);
 
@@ -161,6 +187,8 @@ function addTicket2(ticket){
 
     var id = currentBuyer()._id;
     var ticket = $(this).data().ticketid;
+
+    $(this).html("Request Sent!");
 
 
     console.log("TICKET-ID: " + id);
@@ -183,6 +211,8 @@ function addTicket2(ticket){
   function rejTicket(){
 
       var ticket = $(this).data().ticketid;
+
+      $(this).parent().parent().remove();
 
       console.log("You rejected the ticket!");
 

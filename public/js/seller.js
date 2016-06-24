@@ -166,6 +166,7 @@ function hideSellerProfileMike(){
 // SHOW SELLER - MIKE
 
 function showSellerProfileMike(){
+  console.log("click")
   $('#sellers').slideUp();
   $('#showAndTickets').toggle();
   $.ajax({
