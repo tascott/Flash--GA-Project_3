@@ -4,11 +4,11 @@ $(document).ready(function(){
 
   $("form#new-ticket").on("submit", createTicket);
   $("#ticket-index-button").on("click", toggleShowTickets);
+  $("#closeTickets").on("click", toggleHideTickets);
 
 
-  // $('body').on('click', '#seeTicketsButton', toggleShowTickets)
+  $('body').on('click', '#seeTicketsButton', toggleShowTickets)
   $('body').on('click', '#addTicket', toggleAddTicket)
-
   $('body').on('click', '.hold', holdTicket);
   $('body').on('click', '.auth', authTicket);
   $('body').on('click', '.reject', rejTicket);
@@ -32,6 +32,8 @@ function getTickets(){
 
 
 
+
+
 //INDEX - Tickets
 function toggleShowTickets(){
 
@@ -45,10 +47,16 @@ function toggleShowTickets(){
   }, 500);
 }
 
+function toggleHideTickets(){
+
+  $("#ticketIndex").hide();
+
+}
 
 
 function addTicket2(ticket){
-  $('#ticketIndex').prepend("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p><h3> Date: "+ ticket.date + "</h3><h3> Price: "+ticket.price+" </h3><h3>"+isHeld(ticket)+"</h3>")
+  $('#ticketIndex').append("<div class='ticket-tile'><h2>"+ ticket.event + "</h2><p><h3> Date: "+ ticket.date + "</h3><h3> Price: "+ticket.price+" </h3><h3>"+isHeld(ticket)+"</h3>")
+
 }
 
 
