@@ -3,10 +3,10 @@
 Ever wanted to go to an event at the last minute and wanted a ticket but didn't want to go to the stadium without knowing you had one?
 Look no further.......
 
-Login
-Find your ticket
-Fetch your ticket
-Enjoy!
+- Login
+- Find your ticket
+- Fetch your ticket
+- Enjoy!
 
 Let us introduce the 
 ##FLASH APP!!
@@ -69,19 +69,20 @@ The general idea was there, but these have changed many a time with the theme be
 ###What were the enjoyable bits and where was the struggle?
  
  
-1.Working as a group was both good and challenging. A problem halved is a problem solved, but github had its own challenges.  
- 2.Google maps left some interesting challenges and conversations, but was achieved.  
- 3. Authentication became more interesting when realising we didnt need two authorisations but only one, having built both.  
-4. Linking buyer and seller via a token proved challenging
+- Working as a group was both good and challenging. A problem halved is a problem solved, but github had its own challenges.  
+-  Google maps left some interesting challenges and conversations, but was achieved.  
+-  Authentication became more interesting when realising we didnt need two authorisations but only one, having built both.  
+- Linking buyer and seller via a token proved challenging
 
 ### What would we add in FLASH 2.0 ?
 
-1. Buyer location and moving time frames
+-  Buyer location and moving time frames
 Chat function between buyer and seller
-2. Payment method directly online.
-3. Bidding auction on tickets 
-4. Profile pictures
-5. Imagery on tickets scanned into the app
+- Payment method directly online.
+- Bidding auction on tickets 
+- Profile pictures
+- Imagery on tickets scanned into the app
+
 
 
 
