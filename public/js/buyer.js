@@ -7,6 +7,7 @@ $(document).ready(function(){
 if(checkForSellerLogin()){
   console.log("THERE IS A SELLER LOGIN")
   getBuyers();
+  removeIndex();
   getSellers();
 } 
 
@@ -28,6 +29,12 @@ if(checkForSellerLogin()){
   $('body').on('click', '.buyerClose', hideBuyerProfileMike);
 
   });
+
+function removeIndex(){
+  $('#ticket-index-button').remove();
+}
+
+
 
 function toggleBuyerLoginForm() {
   $(".showable").hide();
