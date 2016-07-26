@@ -1,89 +1,45 @@
-#FLASH!
+#Flash!
 
-Ever wanted to go to an event at the last minute and wanted a ticket but didn't want to go to the stadium without knowing you had one?
-Look no further.......
+Flash is a web application designed to help ticket sellers and buyers find each other and arrange for the purchase of a ticket. The app uses browser geolocation, Google Maps and Sockets to create real-time interactions between users.
 
-- Login
-- Find your ticket
-- Fetch your ticket
-- Enjoy!
+###Built With...
 
-Let us introduce the 
-##FLASH APP!!
-
-###How does this work?
-
-Enter our site and see the tickets you want for an event.....everyone loves the most expensive CORRS ticket , don't they?
-
-Thankfully we know of a seller that can't make it. 
-
-He has a login and is about to add a ticket.
+- JavaScript, jQuery
+- JWT for user authentication
+- MongoDB Database
+- Express & NodeJS
+- Plugins including Sockets.io for live location tracking and map overlays
 
 
-###What do YOU need to do?
+###Sellers Can...
 
-Register and login.
+- Create an account, add details of all their tickets
+- Set prices for their tickets
+- See locations of other sellers
+- Mark tickets as sold, notify buyer of successful reservation
 
-Now a list of all the tickets pop up. 
-Lets find the Corrs ticket.
+###Buyers Can...
 
-Click on get ticket......BINGO!!! 
-You are half way there!!
-
-As you can see, the ticket has now been put on hold for you, for the seller to authorise.
-
-Can you see where he is located?
-
-### What can the seller see?
-
-Ok, so the seller logs in ......
-
-If you look at his ticket, it has ticket ready to be authorised or rejected. If we click authorise, the ticket is sold.
-
-We also have the option to reject from buying a ticket
-
-The ticket is now out of the sellers list.
-
-Check the buyers list!!
-
-There it is.
-
-Enjoy the Corrs!
-
-### How did this come about?
-
-Wire frames....
-
-The general idea was there, but these have changed many a time with the theme being similar.
-
-![MacDown Screenshot](http://i.imgur.com/wMxH41M.png?1)
-
-![MacDown Screenshot](http://i.imgur.com/B5yqx53.png?1)
-
-### What were the General Ideas of work patterns?  
+- See all tickets available without creating an account
+- See all ticket sellers, their locations, and their tickets in real time
+- Request a ticket from a seller
 
 
-![MacDown Screenshot](http://i.imgur.com/GkJGHyG.png?1)
+### Screens
+
+![MacDown Screenshot](http://i.imgur.com/hlcqTGd.png)
  
  
-###What were the enjoyable bits and where was the struggle?
+###The Journey
  
  
-- Working as a group was both good and challenging. A problem halved is a problem solved, but github had its own challenges.  
--  Google maps left some interesting challenges and conversations, but was achieved.  
--  Authentication became more interesting when realising we didnt need two authorisations but only one, having built both.  
-- Linking buyer and seller via a token proved challenging
+- This was a group project which brought its own challenges, however the week went very smoothly.
+-  Web authentication and sockets both proved to be challenging, but extremely important  
+  
 
-### What would we add in FLASH 2.0 ?
+### Flash 2.0
 
--  Buyer location and moving time frames
-Chat function between buyer and seller
-- Payment method directly online.
-- Bidding auction on tickets 
-- Profile pictures
-- Imagery on tickets scanned into the app
-
-
-
-
-
+- Ability to use the app for other products - food, market stalls etc
+- Bug fixes
+- Dummy users to activate map background
+- oAuth login
